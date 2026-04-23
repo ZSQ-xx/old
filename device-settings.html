@@ -20,38 +20,38 @@
         input:checked + .toggle-slider:before { transform: translateX(40px); }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4 md:p-6 min-h-screen">
 <!-- 顶部导航 -->
-<header class="flex items-center mb-8 pb-4 border-b-4 border-slate-700">
-<button class="mr-6" onclick="window.location.href='device.html'">
-<iconify-icon class="text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='device.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
 </button>
-<h1 class="text-4xl font-bold tracking-wider">设备管理设置</h1>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">设备管理设置</h1>
 </header>
 
 <main class="max-w-[1200px] mx-auto">
 <!-- 基础设置 -->
-<div class="high-contrast-card rounded-3xl p-8 mb-8">
-<h2 class="text-3xl font-bold mb-6 text-blue-300">基础设置</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="flex justify-between items-center">
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-blue-300">基础设置</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">设备名称</h3>
-<p class="text-xl text-slate-400">健康监测手环</p>
+<h3 class="text-xl md:text-2xl font-bold">设备名称</h3>
+<p class="text-lg md:text-xl text-slate-400">健康监测手环</p>
 </div>
-<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600">修改</button>
+<button class="bg-slate-700 px-4 md:px-6 py-2 rounded-xl text-lg md:text-xl font-bold hover:bg-slate-600">修改</button>
 </div>
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">音量调节</h3>
-<p class="text-xl text-slate-400">70%</p>
+<h3 class="text-xl md:text-2xl font-bold">音量调节</h3>
+<p class="text-lg md:text-xl text-slate-400">70%</p>
 </div>
-<input type="range" min="0" max="100" value="70" class="w-40 h-4 bg-slate-700 rounded-lg appearance-none cursor-pointer" style="accent-color: #3b82f6;">
+<input type="range" min="0" max="100" value="70" class="w-32 md:w-40 h-4 bg-slate-700 rounded-lg appearance-none cursor-pointer" style="accent-color: #3b82f6;">
 </div>
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">震动开关</h3>
-<p class="text-xl text-slate-400">开启</p>
+<h3 class="text-xl md:text-2xl font-bold">震动开关</h3>
+<p class="text-lg md:text-xl text-slate-400">开启</p>
 </div>
 <label class="toggle-switch">
 <input type="checkbox" checked onclick="toggleSwitch(this)">
@@ -62,33 +62,33 @@
 </div>
 
 <!-- 告警设置 -->
-<div class="high-contrast-card rounded-3xl p-8 mb-8">
-<h2 class="text-3xl font-bold mb-6 text-yellow-400">告警设置</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="flex justify-between items-center">
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-yellow-400">告警设置</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">低电量提醒</h3>
-<p class="text-xl text-slate-400">当电量低于20%时提醒</p>
+<h3 class="text-xl md:text-2xl font-bold">低电量提醒</h3>
+<p class="text-lg md:text-xl text-slate-400">当电量低于20%时提醒</p>
 </div>
 <label class="toggle-switch">
 <input type="checkbox" checked onclick="toggleSwitch(this)">
 <span class="toggle-slider"></span>
 </label>
 </div>
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">离线提醒</h3>
-<p class="text-xl text-slate-400">设备离线时提醒</p>
+<h3 class="text-xl md:text-2xl font-bold">离线提醒</h3>
+<p class="text-lg md:text-xl text-slate-400">设备离线时提醒</p>
 </div>
 <label class="toggle-switch">
 <input type="checkbox" checked onclick="toggleSwitch(this)">
 <span class="toggle-slider"></span>
 </label>
 </div>
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">异常体征告警</h3>
-<p class="text-xl text-slate-400">检测到异常时告警</p>
+<h3 class="text-xl md:text-2xl font-bold">异常体征告警</h3>
+<p class="text-lg md:text-xl text-slate-400">检测到异常时告警</p>
 </div>
 <label class="toggle-switch">
 <input type="checkbox" checked onclick="toggleSwitch(this)">
@@ -99,22 +99,22 @@
 </div>
 
 <!-- 绑定管理 -->
-<div class="high-contrast-card rounded-3xl p-8 mb-8">
-<h2 class="text-3xl font-bold mb-6 text-red-400">绑定管理</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="flex justify-between items-center">
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-red-400">绑定管理</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">解除设备绑定</h3>
-<p class="text-xl text-slate-400">解除与当前设备的绑定</p>
+<h3 class="text-xl md:text-2xl font-bold">解除设备绑定</h3>
+<p class="text-lg md:text-xl text-slate-400">解除与当前设备的绑定</p>
 </div>
-<button class="bg-red-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-red-500" onclick="unbindDevice()">解除绑定</button>
+<button class="bg-red-600 px-4 md:px-6 py-2 rounded-xl text-lg md:text-xl font-bold hover:bg-red-500" onclick="unbindDevice()">解除绑定</button>
 </div>
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
 <div>
-<h3 class="text-2xl font-bold">恢复出厂设置</h3>
-<p class="text-xl text-slate-400">将设备恢复到出厂状态</p>
+<h3 class="text-xl md:text-2xl font-bold">恢复出厂设置</h3>
+<p class="text-lg md:text-xl text-slate-400">将设备恢复到出厂状态</p>
 </div>
-<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="resetDevice()">恢复出厂</button>
+<button class="bg-slate-700 px-4 md:px-6 py-2 rounded-xl text-lg md:text-xl font-bold hover:bg-slate-600" onclick="resetDevice()">恢复出厂</button>
 </div>
 </div>
 </div>
