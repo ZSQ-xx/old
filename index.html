@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>首页 - 养老云生活 - 空巢老人关爱平台</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/echarts.min.5.4.3.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .emergency-btn { background-color: #ef4444; border: 4px solid #ffffff; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 30px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+    </style>
+</head>
+<body class="p-4 md:p-6">
+<!-- 顶部导航 -->
+<header class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-10 pb-4 md:pb-6 border-b-4 border-slate-700 gap-6">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-5xl md:text-6xl text-blue-400" icon="mdi:cloud-heart"></iconify-icon>
+<div>
+<h1 class="text-3xl md:text-5xl font-bold tracking-wider">养老云生活</h1>
+<p class="text-lg md:text-xl text-slate-400 mt-1">空巢老人关爱平台 - 适老模式已开启</p>
+</div>
+</div>
+<nav class="flex flex-wrap gap-3 md:gap-6 justify-center">
+<a class="px-4 md:px-8 py-3 md:py-4 bg-blue-600 rounded-2xl text-xl md:text-3xl font-bold border-4 border-white" href="index.html">我的主页</a>
+<a class="px-4 md:px-8 py-3 md:py-4 high-contrast-card rounded-2xl text-xl md:text-3xl font-bold hover:bg-slate-700" href="service.html">社会服务</a>
+<a class="px-4 md:px-8 py-3 md:py-4 high-contrast-card rounded-2xl text-xl md:text-3xl font-bold hover:bg-slate-700" href="device.html">安全监控</a>
+</nav>
+<div class="text-center md:text-right">
+<p class="text-2xl md:text-3xl font-mono text-yellow-400 font-bold" id="current-time">2026年03月31日 10:30</p>
+<p class="text-lg md:text-xl">天气：晴 22℃ (适宜散步)</p>
+</div>
+</header>
+<main class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+<!-- 左侧：虚拟形象与日程 -->
+<div class="col-span-1 md:col-span-4 space-y-6 md:space-y-8">
+<!-- 虚拟陪伴形象 -->
+<div class="high-contrast-card rounded-3xl p-6 md:p-8 relative overflow-hidden">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-2 text-blue-300">
+<iconify-icon icon="mdi:face-agent"></iconify-icon> AI 陪伴助手 · 小云
+                </h2>
+<div class="flex flex-col items-center">
+<img alt="Virtual AI Companion Character" class="w-48 md:w-64 h-48 md:h-64 rounded-full border-6 md:border-8 border-blue-500 mb-4 md:mb-6" src="https://modao.cc/agent-py/media/generated_images/2026-03-31/3749acdbfcc644c3a2237c0707a711a0.jpg"/>
+<div class="bg-blue-900/50 p-4 md:p-6 rounded-2xl border-2 border-blue-400 text-xl md:text-2xl leading-relaxed italic">
+                        "张爷爷，该喝水了。今天的降压药记得在11点前服用哦。需要我为您播放一段家乡的秦腔吗？"
+                    </div>
+</div>
+<div class="mt-4 md:mt-6 flex flex-wrap justify-center gap-3 md:gap-4">
+<button class="action-button px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg md:text-xl font-bold flex items-center gap-2" onclick="window.location.href='ai-assistant.html'">
+<iconify-icon icon="mdi:microphone"></iconify-icon> 按住说话
+</button>
+<button class="bg-slate-700 px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg md:text-xl font-bold" onclick="showVoicePopup()">更换音色</button>
+<button class="bg-slate-700 px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg md:text-xl font-bold" onclick="showDialectPopup()">切换方言</button>
+</div>
+</div>
+<!-- 语音日程与待办 -->
+<div class="high-contrast-card rounded-3xl p-6 md:p-8">
+<div class="flex justify-between items-center mb-4 md:mb-6">
+<h2 class="text-2xl md:text-3xl font-bold text-yellow-400">今日事项清单</h2>
+<iconify-icon class="text-3xl md:text-4xl cursor-pointer text-blue-400" icon="mdi:volume-high" onclick="showCloseReminderPopup()"></iconify-icon>
+</div>
+<ul class="space-y-3 md:space-y-4">
+<li class="flex items-center gap-3 md:gap-4 bg-slate-800 p-4 md:p-6 rounded-2xl border-l-6 md:border-l-8 border-yellow-500 cursor-pointer" onclick="showTaskPopup('09:00 晨间锻炼', '已语音播报提醒')">
+<input class="w-8 h-8 md:w-10 md:h-10 rounded-lg" type="checkbox"/>
+<div class="flex-1">
+<p class="text-xl md:text-2xl font-bold">09:00 晨间锻炼</p>
+<p class="text-base md:text-lg text-slate-400">已语音播报提醒</p>
+</div>
+</li>
+<li class="flex items-center gap-3 md:gap-4 bg-slate-800 p-4 md:p-6 rounded-2xl border-l-6 md:border-l-8 border-blue-500 opacity-60 cursor-pointer" onclick="showTaskPopup('08:00 吃早餐', '牛奶鸡蛋')">
+<input checked="" class="w-8 h-8 md:w-10 md:h-10 rounded-lg" type="checkbox"/>
+<div class="flex-1 text-slate-400">
+<p class="text-xl md:text-2xl font-bold line-through">08:00 吃早餐 (牛奶鸡蛋)</p>
+</div>
+</li>
+<li class="flex items-center gap-3 md:gap-4 bg-slate-800 p-4 md:p-6 rounded-2xl border-l-6 md:border-l-8 border-red-500 cursor-pointer" onclick="showTaskPopup('11:00 服用降压药', '重要事项')">
+<input class="w-8 h-8 md:w-10 md:h-10 rounded-lg" type="checkbox"/>
+<div class="flex-1">
+<p class="text-xl md:text-2xl font-bold">11:00 服用降压药</p>
+<p class="text-base md:text-lg text-red-400">重要事项</p>
+</div>
+</li>
+</ul>
+<button class="w-full mt-4 md:mt-6 py-4 md:py-5 border-4 border-dashed border-slate-600 rounded-2xl text-xl md:text-2xl text-slate-400 hover:text-white hover:border-white" onclick="showAddTaskPopup()">
+                    + 语音添加新待办
+                </button>
+</div>
+</div>
+<!-- 中间：实时健康看板 -->
+<div class="col-span-1 md:col-span-5 space-y-6 md:space-y-8">
+<div class="high-contrast-card rounded-3xl p-6 md:p-8 cursor-pointer" onclick="window.location.href='health-detail.html'">
+<h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 flex items-center gap-2 text-green-400">
+<iconify-icon icon="mdi:heart-pulse"></iconify-icon> 实时健康体征
+                </h2>
+<div class="grid grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+<div class="bg-slate-900 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">心率 (bpm)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl md:text-6xl font-black text-red-400">72</span>
+<span class="text-base md:text-xl">正常</span>
+</div>
+</div>
+<div class="bg-slate-900 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">血压 (mmHg)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl md:text-6xl font-black text-blue-400">128/84</span>
+</div>
+</div>
+<div class="bg-slate-900 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">血氧浓度 (%)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl md:text-6xl font-black text-green-400">98</span>
+</div>
+</div>
+<div class="bg-slate-900 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">体温 (℃)</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl md:text-6xl font-black text-yellow-400">36.5</span>
+</div>
+</div>
+</div>
+<div class="w-full h-[300px] md:h-[400px]" id="healthChart"></div>
+</div>
+</div>
+<!-- 右侧：紧急呼叫与社会连接 -->
+<div class="col-span-1 md:col-span-3 space-y-6 md:space-y-8">
+<!-- 紧急呼叫按钮 -->
+<button class="emergency-btn w-full aspect-square rounded-full flex flex-col items-center justify-center text-white" onclick="window.location.href='emergency.html'">
+<iconify-icon class="text-7xl md:text-9xl mb-3 md:mb-4" icon="mdi:alert-decagram"></iconify-icon>
+<span class="text-3xl md:text-5xl font-black">紧急呼叫</span>
+<p class="text-base md:text-xl mt-3 md:mt-4 opacity-90">自动联系社区医生与家属</p>
+</button>
+<!-- 呼叫状态显示 (默认隐藏，触发后显示) -->
+<div class="hidden bg-red-900/80 p-4 md:p-6 rounded-3xl border-4 border-red-500" id="call-status">
+<p class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-center">正在紧急联络中...</p>
+<div class="flex flex-col gap-2 md:gap-3">
+<div class="flex justify-between items-center bg-red-800 p-3 md:p-4 rounded-xl">
+<span class="text-base md:text-lg">社区中心 (王主任)</span>
+<span class="text-yellow-400">呼叫中...</span>
+</div>
+<div class="flex justify-between items-center bg-red-800 p-3 md:p-4 rounded-xl">
+<span class="text-base md:text-lg">家属 (张晓明)</span>
+<span class="text-green-400">已通知</span>
+</div>
+</div>
+</div>
+<!-- 连接状态 -->
+<div class="high-contrast-card rounded-3xl p-6 md:p-8">
+<h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-300">智能守护在线</h2>
+<div class="space-y-4 md:space-y-6">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-3xl md:text-4xl text-green-500" icon="mdi:watch-variant"></iconify-icon>
+<div class="flex-1">
+<p class="text-lg md:text-xl font-bold">智能手环</p>
+<p class="text-base md:text-lg text-slate-400">信号强 · 电量 85%</p>
+</div>
+</div>
+<div class="flex items-center gap-3 md:gap-4 cursor-pointer" onclick="window.location.href='track-map.html'">
+<iconify-icon class="text-3xl md:text-4xl text-green-500" icon="mdi:motion-sensor"></iconify-icon>
+<div class="flex-1">
+<p class="text-lg md:text-xl font-bold">轨迹监控</p>
+<p class="text-base md:text-lg text-slate-400">正常 (客厅活动中)</p>
+</div>
+</div>
+<div class="flex items-center gap-3 md:gap-4 cursor-pointer" onclick="window.location.href='community-service.html'">
+<iconify-icon class="text-3xl md:text-4xl text-blue-400" icon="mdi:account-group"></iconify-icon>
+<div class="flex-1">
+<p class="text-lg md:text-xl font-bold">社区服务人员</p>
+<p class="text-base md:text-lg text-slate-400">李护士 预计15:00上门</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // 时间更新
+        function updateTime() {
+            const now = new Date();
+            const timeStr = `${now.getFullYear()}年${String(now.getMonth() + 1).padStart(2, '0')}月${String(now.getDate()).padStart(2, '0')}日 ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            document.getElementById('current-time').innerText = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // 紧急呼叫模拟
+        function triggerEmergency() {
+            document.getElementById('call-status').classList.remove('hidden');
+            setTimeout(() => {
+                alert("已触发紧急预案！正在连线社区值班室，请保持呼吸平稳，救援人员马上就到。");
+            }, 500);
+        }
+
+        // 初始化健康图表
+        const chartDom = document.getElementById('healthChart');
+        const myChart = echarts.init(chartDom, 'dark');
+        const option = {
+            backgroundColor: 'transparent',
+            title: { text: '24小时心率/血压趋势', left: 'center', textStyle: { fontSize: 20 } },
+            tooltip: { trigger: 'axis' },
+            legend: { bottom: 0, textStyle: { color: '#fff', fontSize: 16 } },
+            xAxis: { 
+                type: 'category', 
+                data: ['06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+                axisLabel: { fontSize: 16 }
+            },
+            yAxis: { 
+                type: 'value',
+                axisLabel: { fontSize: 16 },
+                splitLine: { lineStyle: { color: '#334155' } }
+            },
+            series: [
+                {
+                    name: '心率',
+                    type: 'line',
+                    smooth: true,
+                    data: [68, 75, 72, 70, 78, 74, 70, 69],
+                    itemStyle: { color: '#f87171' },
+                    lineStyle: { width: 4 }
+                },
+                {
+                    name: '收缩压',
+                    type: 'line',
+                    smooth: true,
+                    data: [122, 135, 128, 126, 140, 132, 128, 124],
+                    itemStyle: { color: '#60a5fa' },
+                    lineStyle: { width: 4 }
+                }
+            ]
+        };
+        myChart.setOption(option);
+        window.addEventListener('resize', () => myChart.resize());
+
+        // 全局弹窗功能
+        function showVoicePopup() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-blue-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center text-blue-300">选择音色</h3>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <button class="bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-blue-600" onclick="selectVoice('标准女声')">标准女声</button>
+                        <button class="bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-blue-600" onclick="selectVoice('标准男声')">标准男声</button>
+                        <button class="bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-blue-600" onclick="selectVoice('亲切女声')">亲切女声</button>
+                        <button class="bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-blue-600" onclick="selectVoice('温和男声')">温和男声</button>
+                    </div>
+                    <button class="w-full bg-blue-600 p-4 rounded-xl text-xl font-bold hover:bg-blue-500" onclick="this.parentElement.parentElement.remove()">取消</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 选择音色
+        function selectVoice(voice) {
+            try {
+                showSuccessMessage(`已切换为${voice}`);
+                event.target.parentElement.parentElement.parentElement.remove();
+            } catch (error) {
+                console.error('切换音色失败:', error);
+                showErrorMessage('切换音色失败，请重试');
+            }
+        }
+
+        function showCloseReminderPopup() {
+            try {
+                const popup = document.createElement('div');
+                popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+                popup.innerHTML = `
+                    <div class="bg-slate-800 p-8 rounded-3xl border-4 border-yellow-500 max-w-md w-full">
+                        <h3 class="text-3xl font-bold mb-6 text-center text-yellow-400">确认关闭提醒</h3>
+                        <p class="text-2xl text-center mb-8">关闭后将不再收到语音提醒，确定要关闭吗？</p>
+                        <div class="flex gap-4">
+                            <button class="flex-1 bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
+                            <button class="flex-1 bg-red-600 p-4 rounded-xl text-xl font-bold hover:bg-red-500" onclick="this.parentElement.parentElement.parentElement.remove(); showSuccessMessage('提醒已关闭')">确认</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+            } catch (error) {
+                console.error('显示关闭提醒弹窗失败:', error);
+                showErrorMessage('操作失败，请重试');
+            }
+        }
+
+        function showTaskPopup(title, description) {
+            try {
+                const popup = document.createElement('div');
+                popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+                popup.innerHTML = `
+                    <div class="bg-slate-800 p-8 rounded-3xl border-4 border-green-500 max-w-md w-full">
+                        <h3 class="text-3xl font-bold mb-4 text-center text-green-400">${title}</h3>
+                        <p class="text-2xl text-center mb-8">${description}</p>
+                        <div class="flex gap-4">
+                            <button class="flex-1 bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">查看详情</button>
+                            <button class="flex-1 bg-blue-600 p-4 rounded-xl text-xl font-bold hover:bg-blue-500" onclick="this.parentElement.parentElement.parentElement.remove(); showSuccessMessage('已设置延后提醒')">延后提醒</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+            } catch (error) {
+                console.error('显示任务弹窗失败:', error);
+                showErrorMessage('操作失败，请重试');
+            }
+        }
+
+        // 连接成功提示
+        function showSuccessMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-8 py-4 rounded-xl text-2xl font-bold z-50';
+            notification.textContent = message || '连接成功';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // 错误提示
+        function showErrorMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-8 py-4 rounded-xl text-2xl font-bold z-50';
+            notification.textContent = message || '操作失败';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // 警告提示
+        function showWarningMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-yellow-600 text-white px-8 py-4 rounded-xl text-2xl font-bold z-50';
+            notification.textContent = message || '警告';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2500);
+        }
+
+        // 显示切换方言弹窗
+        function showDialectPopup() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-blue-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center">选择方言</h3>
+                    <div class="space-y-4 mb-6">
+                        <button class="w-full bg-slate-700 p-4 rounded-xl text-2xl font-bold hover:bg-slate-600" onclick="selectDialect('普通话')">普通话</button>
+                        <button class="w-full bg-slate-700 p-4 rounded-xl text-2xl font-bold hover:bg-slate-600" onclick="selectDialect('粤语')">粤语</button>
+                        <button class="w-full bg-slate-700 p-4 rounded-xl text-2xl font-bold hover:bg-slate-600" onclick="selectDialect('四川话')">四川话</button>
+                        <button class="w-full bg-slate-700 p-4 rounded-xl text-2xl font-bold hover:bg-slate-600" onclick="selectDialect('东北话')">东北话</button>
+                    </div>
+                    <button class="w-full bg-blue-600 p-4 rounded-xl text-2xl font-bold hover:bg-blue-500" onclick="this.parentElement.parentElement.remove()">取消</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 选择方言
+        function selectDialect(dialect) {
+            try {
+                showSuccessMessage(`已切换为${dialect}`);
+                event.target.parentElement.parentElement.parentElement.remove();
+            } catch (error) {
+                console.error('切换方言失败:', error);
+                showErrorMessage('切换方言失败，请重试');
+            }
+        }
+
+        // 显示添加待办事项弹窗
+        function showAddTaskPopup() {
+            try {
+                const popup = document.createElement('div');
+                popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+                popup.innerHTML = `
+                    <div class="bg-slate-800 p-8 rounded-3xl border-4 border-green-500 max-w-md w-full">
+                        <h3 class="text-3xl font-bold mb-6 text-center text-green-400">添加新待办事项</h3>
+                        <div class="space-y-4 mb-6">
+                            <div>
+                                <label class="block text-2xl mb-4">事项内容</label>
+                                <input type="text" id="task-content" class="bg-slate-700 text-2xl px-4 py-3 rounded-xl w-full" placeholder="请输入待办事项内容">
+                            </div>
+                            <div>
+                                <label class="block text-2xl mb-4">时间</label>
+                                <input type="time" id="task-time" class="bg-slate-700 text-2xl px-4 py-3 rounded-xl w-full">
+                            </div>
+                            <div>
+                                <label class="block text-2xl mb-4">备注</label>
+                                <input type="text" id="task-note" class="bg-slate-700 text-2xl px-4 py-3 rounded-xl w-full" placeholder="可选">
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="flex-1 bg-slate-700 p-4 rounded-xl text-2xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
+                            <button class="flex-1 bg-green-600 p-4 rounded-xl text-2xl font-bold hover:bg-green-500" onclick="addTask()">添加</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+            } catch (error) {
+                console.error('显示添加待办事项弹窗失败:', error);
+                showErrorMessage('操作失败，请重试');
+            }
+        }
+
+        // 添加待办事项
+        function addTask() {
+            try {
+                const content = document.getElementById('task-content').value;
+                const time = document.getElementById('task-time').value;
+                const note = document.getElementById('task-note').value;
+                
+                if (!content) {
+                    showWarningMessage('请输入待办事项内容');
+                    return;
+                }
+                
+                // 创建新的待办事项元素
+                const taskList = document.querySelector('.space-y-4');
+                if (!taskList) {
+                    showErrorMessage('无法找到待办事项列表');
+                    return;
+                }
+                
+                const newTask = document.createElement('li');
+                newTask.className = 'flex items-center gap-4 bg-slate-800 p-6 rounded-2xl border-l-8 border-yellow-500 cursor-pointer';
+                newTask.onclick = function() {
+                    showTaskPopup(`${time} ${content}`, note || '无备注');
+                };
+                
+                newTask.innerHTML = `
+                    <input class="w-10 h-10 rounded-lg" type="checkbox">
+                    <div class="flex-1">
+                        <p class="text-2xl font-bold">${time} ${content}</p>
+                        <p class="text-lg text-slate-400">${note || '无备注'}</p>
+                    </div>
+                `;
+                
+                // 添加到列表顶部
+                taskList.insertBefore(newTask, taskList.firstChild);
+                
+                // 关闭弹窗
+                const popup = document.querySelector('.fixed.inset-0');
+                if (popup) {
+                    popup.remove();
+                }
+                
+                // 显示成功提示
+                showSuccessMessage('待办事项添加成功');
+            } catch (error) {
+                console.error('添加待办事项失败:', error);
+                showErrorMessage('添加待办事项失败，请重试');
+            }
+        }
+    </script>
+</body>
+</html>

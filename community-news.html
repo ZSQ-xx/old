@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>社区动态详情 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+    </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='service.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">社区动态详情</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 动态详情 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-yellow-400" id="news-title">社区动态详情</h2>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-6 md:mb-8">
+<span class="text-lg md:text-xl text-slate-400" id="news-date">2026-04-22</span>
+<span class="bg-red-600 text-sm px-2 py-1 rounded" id="news-tag">置顶</span>
+</div>
+<div class="text-xl md:text-2xl leading-relaxed mb-6 md:mb-8 whitespace-pre-line" id="news-content">
+    这里是社区动态的详细内容...
+</div>
+<div class="flex flex-col md:flex-row gap-3 md:gap-4">
+<button class="action-button flex-1 py-3 md:py-4 rounded-xl text-lg md:text-2xl font-bold" onclick="showNotification('已收藏该动态')">收藏</button>
+<button class="action-button flex-1 py-3 md:py-4 rounded-xl text-lg md:text-2xl font-bold" onclick="showNotification('已分享该动态')">分享</button>
+</div>
+</div>
+
+<!-- 相关动态 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-blue-300">相关动态</h2>
+<div class="space-y-4">
+<div class="border-b-2 border-slate-700 pb-4 cursor-pointer hover:text-yellow-400" onclick="window.location.href='community-news.html?news=2'">
+<p class="text-xl md:text-2xl font-bold">关于"银发学堂"报名的通知</p>
+<p class="text-base md:text-lg text-slate-400">智能手机教学班火热报名中</p>
+</div>
+<div class="border-b-2 border-slate-700 pb-4 cursor-pointer hover:text-yellow-400" onclick="window.location.href='community-news.html?news=3'">
+<p class="text-xl md:text-2xl font-bold">四月助餐菜谱公示</p>
+<p class="text-base md:text-lg text-slate-400">荤素搭配，更加健康</p>
+</div>
+<div class="pb-4 cursor-pointer hover:text-yellow-400" onclick="window.location.href='community-news.html?news=1'">
+<p class="text-xl md:text-2xl font-bold">明天下午2点 社区免费义诊</p>
+<p class="text-base md:text-lg text-slate-400">地点：社区广场一楼</p>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-xl text-lg md:text-xl font-bold z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // 获取URL参数，显示对应动态详情
+        function getNewsDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('news') || '1';
+            
+            const newsData = {
+                '1': {
+                    title: '明天下午2点 社区免费义诊',
+                    date: '2026-04-23',
+                    tag: '置顶',
+                    content: '社区将于明天下午2点在社区广场一楼举行免费义诊活动，届时将有专业医生为社区居民提供健康咨询、血压测量、血糖检测等服务。欢迎社区居民踊跃参加！\n\n活动时间：2026年4月24日 14:00-16:00\n活动地点：社区广场一楼\n服务内容：健康咨询、血压测量、血糖检测、用药指导\n\n温馨提示：请携带身份证等有效证件，如有既往病史请携带相关病历资料。'
+                },
+                '2': {
+                    title: '关于"银发学堂"报名的通知',
+                    date: '2026-04-20',
+                    tag: '',
+                    content: '为丰富社区老年人的精神文化生活，提高老年人的科技素养，社区将开设"银发学堂"，主要教授智能手机使用、网上购物、视频通话等实用技能。\n\n报名时间：即日起至2026年4月30日\n上课时间：每周二、四下午2:00-4:00\n上课地点：社区活动中心\n报名方式：到社区服务中心登记或拨打社区热线12345678报名\n\n欢迎广大老年朋友积极报名参加！'
+                },
+                '3': {
+                    title: '四月助餐菜谱公示',
+                    date: '2026-04-01',
+                    tag: '',
+                    content: '为保证社区老年人的饮食健康，社区助餐服务中心特制定了四月菜谱，荤素搭配，营养均衡。\n\n周一：红烧肉、清炒时蔬、米饭、汤\n周二：宫保鸡丁、炒西兰花、米饭、汤\n周三：鱼香肉丝、炒菠菜、米饭、汤\n周四：水煮肉片、炒空心菜、米饭、汤\n周五：烤鸭、炒土豆丝、馒头、粥\n\n如有特殊饮食需求，请提前告知社区助餐服务中心。'
+                }
+            };
+            
+            const news = newsData[newsId];
+            if (news) {
+                document.getElementById('news-title').textContent = news.title;
+                document.getElementById('news-date').textContent = news.date;
+                document.getElementById('news-tag').textContent = news.tag || '';
+                document.getElementById('news-tag').style.display = news.tag ? 'inline-block' : 'none';
+                document.getElementById('news-content').textContent = news.content;
+            }
+        }
+        
+        // 页面加载时获取新闻详情
+        window.onload = getNewsDetails;
+    </script>
+</body>
+</html>

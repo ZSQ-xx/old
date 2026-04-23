@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>室外监控 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .monitor-placeholder { background-color: #0a0f1a; position: relative; overflow: hidden; }
+        .monitor-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(10, 15, 26, 0.8) 0%, rgba(10, 15, 26, 0.5) 50%, rgba(10, 15, 26, 0.8) 100%);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='device.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">室外监控</h1>
+</header>
+
+<main class="max-w-[1400px] mx-auto">
+<!-- 监控画面 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-blue-300">门口监控</h2>
+<div class="monitor-placeholder rounded-2xl h-[300px] md:h-[500px] flex items-center justify-center">
+<div class="relative z-10 text-center px-4">
+<iconify-icon class="text-6xl md:text-8xl text-blue-400 mb-3 md:mb-4" icon="mdi:video"></iconify-icon>
+<p class="text-2xl md:text-3xl font-bold">实时监控画面</p>
+<p class="text-lg md:text-xl text-slate-400 mt-2">门口 - 192.168.1.103</p>
+<p class="text-lg md:text-xl text-green-400 mt-3 md:mt-4">在线 | 高清</p>
+</div>
+</div>
+</div>
+
+<!-- 监控列表 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+<div class="high-contrast-card rounded-3xl p-4 md:p-6">
+<h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-green-400">阳台监控</h3>
+<div class="monitor-placeholder rounded-2xl h-[200px] md:h-[300px] flex items-center justify-center">
+<div class="relative z-10 text-center">
+<iconify-icon class="text-3xl md:text-4xl text-green-400 mb-2" icon="mdi:video"></iconify-icon>
+<p class="text-lg md:text-xl font-bold">实时监控画面</p>
+<p class="text-base md:text-lg text-slate-400 mt-1">阳台 - 192.168.1.104</p>
+<p class="text-base md:text-lg text-green-400 mt-2">在线 | 高清</p>
+</div>
+</div>
+</div>
+<div class="high-contrast-card rounded-3xl p-4 md:p-6">
+<h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-yellow-400">小区监控</h3>
+<div class="monitor-placeholder rounded-2xl h-[200px] md:h-[300px] flex items-center justify-center">
+<div class="relative z-10 text-center">
+<iconify-icon class="text-3xl md:text-4xl text-yellow-400 mb-2" icon="mdi:video"></iconify-icon>
+<p class="text-lg md:text-xl font-bold">实时监控画面</p>
+<p class="text-base md:text-lg text-slate-400 mt-1">小区 - 192.168.1.105</p>
+<p class="text-base md:text-lg text-green-400 mt-2">在线 | 高清</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 监控控制 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-blue-300">监控控制</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+<button class="action-button p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold" onclick="showNotification('已开启录像')">开启录像</button>
+<button class="action-button p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold" onclick="showNotification('已开启移动侦测')">移动侦测</button>
+<button class="action-button p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold" onclick="showNotification('已开启人脸识别')">人脸识别</button>
+<button class="action-button p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold" onclick="showNotification('已调整摄像头角度')">调整角度</button>
+<button class="action-button p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold" onclick="showNotification('已开启夜视模式')">夜视模式</button>
+<button class="action-button p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold" onclick="showNotification('已查看历史录像')">历史录像</button>
+</div>
+</div>
+</main>
+
+<script>
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-xl text-lg md:text-xl font-bold z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

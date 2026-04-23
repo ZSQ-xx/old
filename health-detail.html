@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>健康数据中心 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/echarts.min.5.4.3.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .tab-active { background-color: #3b82f6; color: #ffffff; }
+        .tab-inactive { background-color: #1e293b; color: #94a3b8; }
+    </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='index.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">健康数据中心</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 数据切换标签 -->
+<div class="flex gap-2 md:gap-4 mb-6 md:mb-8 overflow-x-auto">
+<button class="tab-active px-4 md:px-8 py-2 md:py-4 rounded-xl text-lg md:text-2xl font-bold flex-shrink-0" onclick="switchTab('today')">今日</button>
+<button class="tab-inactive px-4 md:px-8 py-2 md:py-4 rounded-xl text-lg md:text-2xl font-bold flex-shrink-0" onclick="switchTab('7days')">7天</button>
+<button class="tab-inactive px-4 md:px-8 py-2 md:py-4 rounded-xl text-lg md:text-2xl font-bold flex-shrink-0" onclick="switchTab('30days')">30天</button>
+</div>
+
+<!-- 体征模块 -->
+<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
+<div class="high-contrast-card rounded-2xl md:rounded-3xl p-3 md:p-6">
+<p class="text-base md:text-xl text-slate-400">血压 (mmHg)</p>
+<div class="flex items-baseline gap-1 md:gap-2">
+<span class="text-3xl md:text-5xl font-black text-blue-400">128/84</span>
+<span class="text-base md:text-xl text-green-400">正常</span>
+</div>
+</div>
+<div class="high-contrast-card rounded-2xl md:rounded-3xl p-3 md:p-6">
+<p class="text-base md:text-xl text-slate-400">心率 (bpm)</p>
+<div class="flex items-baseline gap-1 md:gap-2">
+<span class="text-3xl md:text-5xl font-black text-red-400">72</span>
+<span class="text-base md:text-xl text-green-400">正常</span>
+</div>
+</div>
+<div class="high-contrast-card rounded-2xl md:rounded-3xl p-3 md:p-6">
+<p class="text-base md:text-xl text-slate-400">血氧浓度 (%)</p>
+<div class="flex items-baseline gap-1 md:gap-2">
+<span class="text-3xl md:text-5xl font-black text-green-400">98</span>
+<span class="text-base md:text-xl text-green-400">正常</span>
+</div>
+</div>
+<div class="high-contrast-card rounded-2xl md:rounded-3xl p-3 md:p-6">
+<p class="text-base md:text-xl text-slate-400">体温 (℃)</p>
+<div class="flex items-baseline gap-1 md:gap-2">
+<span class="text-3xl md:text-5xl font-black text-yellow-400">36.5</span>
+<span class="text-base md:text-xl text-green-400">正常</span>
+</div>
+</div>
+</div>
+
+<!-- 数据曲线图 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-green-400">健康数据趋势</h2>
+<div class="w-full h-[300px] md:h-[400px]" id="healthChart"></div>
+</div>
+
+<!-- 底部按钮 -->
+<div class="flex flex-col md:flex-row gap-3 md:gap-4">
+<button class="action-button flex-1 py-3 md:py-4 rounded-xl text-lg md:text-2xl font-bold" onclick="showConsultPopup()">
+<iconify-icon class="inline-block mr-2" icon="mdi:doctor"></iconify-icon> 咨询医生
+</button>
+<button class="bg-blue-600 flex-1 py-3 md:py-4 rounded-xl text-lg md:text-2xl font-bold" onclick="exportReport()">
+<iconify-icon class="inline-block mr-2" icon="mdi:file-pdf-box"></iconify-icon> 导出健康报告
+</button>
+</div>
+</main>
+
+<script>
+        // 数据切换标签功能
+        function switchTab(tab) {
+            // 切换标签样式
+            document.querySelectorAll('button').forEach(btn => {
+                if (btn.classList.contains('tab-active') || btn.classList.contains('tab-inactive')) {
+                    btn.className = 'tab-inactive px-4 md:px-8 py-2 md:py-4 rounded-xl text-lg md:text-2xl font-bold flex-shrink-0';
+                }
+            });
+            event.target.className = 'tab-active px-4 md:px-8 py-2 md:py-4 rounded-xl text-lg md:text-2xl font-bold flex-shrink-0';
+            
+            // 显示成功消息
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-xl text-lg md:text-xl font-bold z-50';
+            notification.textContent = `切换到${tab === 'today' ? '今日' : tab === '7days' ? '7天' : '30天'}数据`;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // 咨询医生弹窗
+        function showConsultPopup() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border-4 border-blue-500 max-w-md w-full mx-4">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-blue-300">咨询医生</h3>
+                    <p class="text-xl md:text-2xl text-center mb-6 md:mb-8">正在为您联系医生，请稍候...</p>
+                    <div class="flex justify-center">
+                        <div class="w-16 md:w-20 h-16 md:h-20 border-8 border-t-blue-500 border-r-blue-500 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                    </div>
+                    <button class="w-full mt-6 md:mt-8 bg-slate-700 p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.remove()">取消</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 导出健康报告
+        function exportReport() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border-4 border-green-500 max-w-md w-full mx-4">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-green-400">导出健康报告</h3>
+                    <p class="text-xl md:text-2xl text-center mb-6 md:mb-8">正在生成健康报告，请稍候...</p>
+                    <div class="flex justify-center">
+                        <div class="w-16 md:w-20 h-16 md:h-20 border-8 border-t-green-500 border-r-green-500 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+
+            // 模拟导出过程
+            setTimeout(() => {
+                popup.remove();
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-xl text-lg md:text-xl font-bold z-50';
+                notification.textContent = '健康报告已导出';
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.remove();
+                }, 2000);
+            }, 2000);
+        }
+
+        // 初始化健康图表
+        const chartDom = document.getElementById('healthChart');
+        const myChart = echarts.init(chartDom, 'dark');
+        const option = {
+            backgroundColor: 'transparent',
+            title: { text: '健康数据趋势', left: 'center', textStyle: { fontSize: 16 } },
+            tooltip: { trigger: 'axis' },
+            legend: { bottom: 0, textStyle: { color: '#fff', fontSize: 14 } },
+            xAxis: { 
+                type: 'category', 
+                data: ['06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+                axisLabel: { fontSize: 12 }
+            },
+            yAxis: { 
+                type: 'value',
+                axisLabel: { fontSize: 12 },
+                splitLine: { lineStyle: { color: '#334155' } }
+            },
+            series: [
+                {
+                    name: '心率',
+                    type: 'line',
+                    smooth: true,
+                    data: [68, 75, 72, 70, 78, 74, 70, 69],
+                    itemStyle: { color: '#f87171' },
+                    lineStyle: { width: 3 }
+                },
+                {
+                    name: '收缩压',
+                    type: 'line',
+                    smooth: true,
+                    data: [122, 135, 128, 126, 140, 132, 128, 124],
+                    itemStyle: { color: '#60a5fa' },
+                    lineStyle: { width: 3 }
+                }
+            ]
+        };
+        myChart.setOption(option);
+        window.addEventListener('resize', () => myChart.resize());
+    </script>
+</body>
+</html>

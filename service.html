@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>社会服务门户 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .service-card:hover { border-color: #facc15; transform: translateY(-5px); transition: all 0.3s; }
+        .big-input { background: #0f172a; border: 3px solid #475569; padding: 20px; font-size: 24px; border-radius: 15px; width: 100%; color: #fff; }
+    </style>
+</head>
+<body class="p-4 md:p-6">
+<!-- 顶部导航 -->
+<header class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-10 pb-4 md:pb-6 border-b-4 border-slate-700 gap-6">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-5xl md:text-6xl text-blue-400" icon="mdi:account-group"></iconify-icon>
+<h1 class="text-3xl md:text-5xl font-bold tracking-wider">社会服务门户</h1>
+</div>
+<nav class="flex flex-wrap gap-3 md:gap-6 justify-center">
+<a class="px-4 md:px-8 py-3 md:py-4 high-contrast-card rounded-2xl text-xl md:text-3xl font-bold hover:bg-slate-700" href="index.html">我的主页</a>
+<a class="px-4 md:px-8 py-3 md:py-4 bg-blue-600 rounded-2xl text-xl md:text-3xl font-bold border-4 border-white" href="service.html">社会服务</a>
+<a class="px-4 md:px-8 py-3 md:py-4 high-contrast-card rounded-2xl text-xl md:text-3xl font-bold hover:bg-slate-700" href="device.html">安全监控</a>
+</nav>
+</header>
+<main class="max-w-[1400px] mx-auto">
+<!-- 搜索与查询区域 -->
+<section class="high-contrast-card rounded-3xl p-6 md:p-10 mb-8 md:mb-10">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-yellow-400">服务查询与老人关怀档案</h2>
+<div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start md:items-end">
+<div class="flex-1">
+<label class="block text-xl md:text-2xl mb-3 md:mb-4">请输入老人姓名或身份证号 (权限加密):</label>
+<input class="big-input" placeholder="例如：张*平" type="text"/>
+</div>
+<button class="bg-blue-600 px-6 md:px-12 py-3 md:py-5 rounded-2xl text-xl md:text-3xl font-bold hover:bg-blue-500" onclick="window.location.href='archives.html'">
+<iconify-icon class="inline-block mr-2" icon="mdi:magnify"></iconify-icon> 查询档案
+                </button>
+</div>
+<!-- 隐私保护摘要 -->
+<div class="mt-6 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+<div class="bg-slate-800 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">当前照护状态</p>
+<p class="text-2xl md:text-3xl font-bold text-green-400">重点关注 (空巢)</p>
+</div>
+<div class="bg-slate-800 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">上门服务记录</p>
+<p class="text-2xl md:text-3xl font-bold">2026-03-28 已助洁</p>
+</div>
+<div class="bg-slate-800 p-4 md:p-6 rounded-2xl border-2 border-slate-700">
+<p class="text-base md:text-xl text-slate-400">异常报警统计 (本月)</p>
+<p class="text-2xl md:text-3xl font-bold text-red-400">1次 (已处置)</p>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
+<!-- 预约上门服务 -->
+<div class="col-span-1 md:col-span-8 space-y-6 md:space-y-8">
+<h2 class="text-3xl md:text-4xl font-bold text-blue-300">在线预约上门服务</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+<!-- 服务卡片 -->
+<div class="high-contrast-card service-card rounded-3xl p-6 md:p-8 cursor-pointer" onclick="window.location.href='service-meal.html'">
+<div class="flex items-center gap-4 md:gap-6 mb-4">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-orange-900/50 rounded-full flex items-center justify-center">
+<iconify-icon class="text-4xl md:text-5xl text-orange-400" icon="mdi:silverware-fork-knife"></iconify-icon>
+</div>
+<div>
+<h3 class="text-2xl md:text-3xl font-bold">社区助餐</h3>
+<p class="text-lg md:text-xl text-slate-400">营养午餐/晚餐配送</p>
+</div>
+</div>
+<button class="w-full bg-slate-700 py-3 md:py-4 rounded-xl text-xl md:text-2xl font-bold hover:bg-orange-600" onclick="window.location.href='service-meal.html'">立即预约</button>
+</div>
+<div class="high-contrast-card service-card rounded-3xl p-6 md:p-8 cursor-pointer" onclick="window.location.href='service-medical.html'">
+<div class="flex items-center gap-4 md:gap-6 mb-4">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-blue-900/50 rounded-full flex items-center justify-center">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:doctor"></iconify-icon>
+</div>
+<div>
+<h3 class="text-2xl md:text-3xl font-bold">医疗助医</h3>
+<p class="text-lg md:text-xl text-slate-400">陪同就诊/代取药品</p>
+</div>
+</div>
+<button class="w-full bg-slate-700 py-3 md:py-4 rounded-xl text-xl md:text-2xl font-bold hover:bg-blue-600" onclick="window.location.href='service-medical.html'">立即预约</button>
+</div>
+<div class="high-contrast-card service-card rounded-3xl p-6 md:p-8 cursor-pointer" onclick="window.location.href='service-bath.html'">
+<div class="flex items-center gap-4 md:gap-6 mb-4">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-teal-900/50 rounded-full flex items-center justify-center">
+<iconify-icon class="text-4xl md:text-5xl text-teal-400" icon="mdi:shower"></iconify-icon>
+</div>
+<div>
+<h3 class="text-2xl md:text-3xl font-bold">居家助浴</h3>
+<p class="text-lg md:text-xl text-slate-400">专业护理员上门</p>
+</div>
+</div>
+<button class="w-full bg-slate-700 py-3 md:py-4 rounded-xl text-xl md:text-2xl font-bold hover:bg-teal-600" onclick="window.location.href='service-bath.html'">立即预约</button>
+</div>
+<div class="high-contrast-card service-card rounded-3xl p-6 md:p-8 cursor-pointer" onclick="window.location.href='service-cleaning.html'">
+<div class="flex items-center gap-4 md:gap-6 mb-4">
+<div class="w-20 h-20 md:w-24 md:h-24 bg-purple-900/50 rounded-full flex items-center justify-center">
+<iconify-icon class="text-4xl md:text-5xl text-purple-400" icon="mdi:broom"></iconify-icon>
+</div>
+<div>
+<h3 class="text-2xl md:text-3xl font-bold">居家助洁</h3>
+<p class="text-lg md:text-xl text-slate-400">打扫卫生/衣物清洗</p>
+</div>
+</div>
+<button class="w-full bg-slate-700 py-3 md:py-4 rounded-xl text-xl md:text-2xl font-bold hover:bg-purple-600" onclick="window.location.href='service-cleaning.html'">立即预约</button>
+</div>
+</div>
+</div>
+<!-- 侧边栏：社区公告与互动 -->
+<div class="col-span-1 md:col-span-4 space-y-6 md:space-y-8">
+<div class="high-contrast-card rounded-3xl p-6 md:p-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 flex items-center gap-2 text-yellow-400">
+<iconify-icon icon="mdi:bullhorn-variant"></iconify-icon> 社区动态
+                    </h2>
+<div class="space-y-4 md:space-y-6">
+<div class="border-b-2 border-slate-700 pb-4 cursor-pointer hover:text-yellow-400" onclick="window.location.href='community-news.html?news=1'">
+<span class="bg-red-600 text-sm px-2 py-1 rounded">置顶</span>
+<p class="text-xl md:text-2xl font-bold mt-2">明天下午2点 社区免费义诊</p>
+<p class="text-base md:text-lg text-slate-400">地点：社区广场一楼</p>
+</div>
+<div class="border-b-2 border-slate-700 pb-4 cursor-pointer hover:text-yellow-400" onclick="window.location.href='community-news.html?news=2'">
+<p class="text-xl md:text-2xl font-bold">关于“银发学堂”报名的通知</p>
+<p class="text-base md:text-lg text-slate-400">智能手机教学班火热报名中</p>
+</div>
+<div class="pb-4 cursor-pointer hover:text-yellow-400" onclick="window.location.href='community-news.html?news=3'">
+<p class="text-xl md:text-2xl font-bold">四月助餐菜谱公示</p>
+<p class="text-base md:text-lg text-slate-400">荤素搭配，更加健康</p>
+</div>
+</div>
+</div>
+<!-- 紧急求助 -->
+<div class="bg-red-600 p-6 md:p-8 rounded-3xl flex items-center gap-4 md:gap-6 cursor-pointer hover:bg-red-500 transition-all" onclick="callCommunityHotline()">
+<iconify-icon class="text-5xl md:text-6xl" icon="mdi:phone-alert"></iconify-icon>
+<div>
+<p class="text-2xl md:text-3xl font-black">社区直连热线</p>
+<p class="text-lg md:text-xl">遇到困难按这里</p>
+</div>
+</div>
+
+<script>
+        // 社区直连热线
+        function callCommunityHotline() {
+            try {
+                const popup = document.createElement('div');
+                popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+                popup.innerHTML = `
+                    <div class="bg-slate-800 p-8 rounded-3xl border-4 border-red-500 max-w-md w-full">
+                        <h3 class="text-3xl font-bold mb-6 text-center text-red-400">社区直连热线</h3>
+                        <div class="flex flex-col items-center gap-6">
+                            <div class="w-32 h-32 rounded-full bg-red-900/50 flex items-center justify-center">
+                                <iconify-icon class="text-6xl text-red-400" icon="mdi:phone-alert"></iconify-icon>
+                            </div>
+                            <p class="text-2xl text-center">正在拨打社区热线...</p>
+                            <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-red-500 h-full w-0" id="call-progress"></div>
+                            </div>
+                            <p class="text-xl text-center mt-4">热线电话：12345678</p>
+                            <button class="w-full bg-red-600 p-4 rounded-xl text-2xl font-bold hover:bg-red-500" onclick="this.parentElement.parentElement.parentElement.remove()">取消呼叫</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+                
+                // 模拟通话连接过程
+                const progressBar = document.getElementById('call-progress');
+                if (!progressBar) {
+                    throw new Error('无法找到进度条元素');
+                }
+                
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        const statusElement = document.querySelector('.text-2xl.text-center');
+                        if (statusElement) {
+                            statusElement.textContent = '通话中...';
+                        }
+                    } else {
+                        width += 5;
+                        progressBar.style.width = width + '%';
+                    }
+                }, 100);
+            } catch (error) {
+                console.error('拨打社区热线失败:', error);
+                // 创建错误提示
+                const errorPopup = document.createElement('div');
+                errorPopup.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-8 py-4 rounded-xl text-2xl font-bold z-50';
+                errorPopup.textContent = '拨打社区热线失败，请重试';
+                document.body.appendChild(errorPopup);
+                setTimeout(() => {
+                    errorPopup.remove();
+                }, 3000);
+            }
+        }
+    </script>
+</div>
+</div>
+</main>
+</body>
+</html>

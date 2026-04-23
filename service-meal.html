@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>社区助餐服务 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+    </style>
+</head>
+<body class="p-6">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-6" onclick="window.location.href='service.html'">
+<iconify-icon class="text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-4xl font-bold tracking-wider">社区助餐服务</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 服务介绍 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-orange-400">服务介绍</h2>
+<p class="text-2xl leading-relaxed">社区助餐服务为老年人提供营养均衡的午餐和晚餐配送服务，由专业营养师根据老年人的健康状况和饮食需求制定菜单，确保饮食健康、安全、美味。</p>
+</div>
+
+<!-- 服务内容 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-orange-400">服务内容</h2>
+<ul class="space-y-4 text-2xl">
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-orange-400" icon="mdi:check-circle"></iconify-icon>
+<span>营养午餐配送（周一至周五）</span>
+</li>
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-orange-400" icon="mdi:check-circle"></iconify-icon>
+<span>营养晚餐配送（周一至周五）</span>
+</li>
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-orange-400" icon="mdi:check-circle"></iconify-icon>
+<span>周末加餐服务</span>
+</li>
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-orange-400" icon="mdi:check-circle"></iconify-icon>
+<span>特殊饮食定制（糖尿病、高血压等）</span>
+</li>
+</ul>
+</div>
+
+<!-- 菜单示例 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-orange-400">本周菜单</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-slate-800 p-6 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4">周一</h3>
+<p class="text-xl">午餐：红烧肉、清炒时蔬、米饭、汤</p>
+<p class="text-xl">晚餐：清蒸鱼、凉拌黄瓜、馒头、粥</p>
+</div>
+<div class="bg-slate-800 p-6 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4">周二</h3>
+<p class="text-xl">午餐：宫保鸡丁、炒西兰花、米饭、汤</p>
+<p class="text-xl">晚餐：炖排骨、炒豆芽、馒头、粥</p>
+</div>
+<div class="bg-slate-800 p-6 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4">周三</h3>
+<p class="text-xl">午餐：鱼香肉丝、炒菠菜、米饭、汤</p>
+<p class="text-xl">晚餐：烤鸭、炒土豆丝、馒头、粥</p>
+</div>
+<div class="bg-slate-800 p-6 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4">周四</h3>
+<p class="text-xl">午餐：水煮肉片、炒空心菜、米饭、汤</p>
+<p class="text-xl">晚餐：炖牛肉、炒胡萝卜、馒头、粥</p>
+</div>
+</div>
+</div>
+
+<!-- 预约表单 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-orange-400">预约服务</h2>
+<div class="space-y-6">
+<div class="flex flex-col md:flex-row gap-4">
+<div class="flex-1">
+<label class="block text-2xl mb-4">预约日期</label>
+<input type="date" class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full">
+</div>
+<div class="flex-1">
+<label class="block text-2xl mb-4">服务类型</label>
+<select class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full">
+<option>午餐配送</option>
+<option>晚餐配送</option>
+<option>午餐+晚餐配送</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-2xl mb-4">特殊需求</label>
+<textarea class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full" rows="4" placeholder="请输入特殊饮食需求，如糖尿病、高血压等"></textarea>
+</div>
+<div class="flex gap-4">
+<button class="action-button flex-1 py-4 rounded-xl text-2xl font-bold" onclick="bookService()">确认预约</button>
+<button class="bg-slate-700 flex-1 py-4 rounded-xl text-2xl font-bold" onclick="window.location.href='service.html'">取消</button>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        function bookService() {
+            alert('预约成功！我们将在预约时间为您配送餐食。');
+            window.location.href='service.html';
+        }
+    </script>
+</body>
+</html>

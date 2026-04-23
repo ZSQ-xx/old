@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>紧急呼救 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .emergency-bg { background-color: #1e1b4b; background-image: radial-gradient(#ef4444 1px, transparent 1px); background-size: 20px 20px; }
+        .emergency-card { background-color: #1e1b4b; border: 4px solid #ef4444; }
+        .emergency-button { background-color: #ef4444; color: #ffffff; transition: all 0.3s; }
+        .emergency-button:hover { background-color: #dc2626; transform: scale(1.05); }
+        .calling-animation { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 30px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        .calling-text { animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body class="p-4 md:p-6 emergency-bg min-h-screen flex flex-col items-center justify-center">
+<main class="max-w-[600px] w-full">
+<!-- 紧急呼救卡片 -->
+<div class="emergency-card rounded-3xl p-6 md:p-8 mb-6 md:mb-8 text-center">
+<div class="flex justify-start mb-6 md:mb-8">
+<button onclick="window.location.href='index.html'">
+<iconify-icon class="text-4xl md:text-5xl text-white" icon="mdi:arrow-left"></iconify-icon>
+</button>
+</div>
+
+<div class="mb-6 md:mb-8">
+<iconify-icon class="text-8xl md:text-12xl text-red-500 calling-animation" icon="mdi:alert-decagram"></iconify-icon>
+</div>
+
+<h1 class="text-4xl md:text-5xl font-black mb-3 md:mb-4 text-red-400">紧急呼救</h1>
+<p class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 calling-text">正在联系家属 & 社区医护</p>
+
+<!-- 联络列表 -->
+<div class="space-y-3 md:space-y-4 mb-6 md:mb-8">
+<div class="bg-slate-800 p-3 md:p-4 rounded-xl flex justify-between items-center">
+<span class="text-xl md:text-2xl font-bold">子女 (张晓明)</span>
+<span class="text-yellow-400 text-xl md:text-2xl">呼叫中...</span>
+</div>
+<div class="bg-slate-800 p-3 md:p-4 rounded-xl flex justify-between items-center">
+<span class="text-xl md:text-2xl font-bold">社区护士 (李护士)</span>
+<span class="text-yellow-400 text-xl md:text-2xl">呼叫中...</span>
+</div>
+<div class="bg-slate-800 p-3 md:p-4 rounded-xl flex justify-between items-center">
+<span class="text-xl md:text-2xl font-bold">紧急救援</span>
+<span class="text-green-400 text-xl md:text-2xl">已通知</span>
+</div>
+</div>
+
+<!-- 操作按钮 -->
+<div class="flex flex-col gap-3 md:gap-4">
+<button class="emergency-button w-full py-4 md:py-6 rounded-xl text-2xl md:text-3xl font-bold" onclick="call120()">
+<iconify-icon class="inline-block mr-2" icon="mdi:phone"></iconify-icon> 一键拨打120
+</button>
+<button class="bg-slate-700 w-full py-4 md:py-6 rounded-xl text-2xl md:text-3xl font-bold" onclick="cancelCall()">
+<iconify-icon class="inline-block mr-2" icon="mdi:cancel"></iconify-icon> 取消呼救
+</button>
+</div>
+</div>
+</main>
+
+<script>
+        // 一键拨打120
+        function call120() {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-xl text-lg md:text-xl font-bold z-50';
+            notification.textContent = '正在拨打120...';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // 取消呼救
+        function cancelCall() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border-4 border-yellow-500 max-w-md w-full mx-4">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-yellow-400">确认取消呼救</h3>
+                    <p class="text-xl md:text-2xl text-center mb-6 md:mb-8">取消后将停止联系救援人员，确定要取消吗？</p>
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-slate-700 p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">继续呼救</button>
+                        <button class="flex-1 bg-red-600 p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold hover:bg-red-500" onclick="this.parentElement.parentElement.parentElement.remove(); window.location.href='index.html'">确认取消</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+    </script>
+</body>
+</html>

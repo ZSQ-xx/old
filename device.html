@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>安全监控中心 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .map-placeholder { background-color: #0f172a; background-image: radial-gradient(#334155 1px, transparent 1px); background-size: 20px 20px; position: relative; }
+        .track-point { width: 20px; height: 20px; background-color: #facc15; border-radius: 50%; position: absolute; box-shadow: 0 0 15px #facc15; }
+        .track-line { border-bottom: 4px dashed #facc15; opacity: 0.3; position: absolute; }
+    </style>
+</head>
+<body class="p-6">
+<!-- 顶部导航 -->
+<header class="flex justify-between items-center mb-10 pb-6 border-b-4 border-slate-700">
+<div class="flex items-center gap-4">
+<iconify-icon class="text-6xl text-blue-400" icon="mdi:security"></iconify-icon>
+<h1 class="text-5xl font-bold tracking-wider">智能设备与监控</h1>
+</div>
+<nav class="flex gap-6">
+<a class="px-8 py-4 high-contrast-card rounded-2xl text-3xl font-bold hover:bg-slate-700" href="index.html">我的主页</a>
+<a class="px-8 py-4 high-contrast-card rounded-2xl text-3xl font-bold hover:bg-slate-700" href="service.html">社会服务</a>
+<a class="px-8 py-4 bg-blue-600 rounded-2xl text-3xl font-bold border-4 border-white" href="device.html">安全监控</a>
+</nav>
+</header>
+<main class="grid grid-cols-12 gap-10">
+<!-- 左侧：设备状态列表 -->
+<div class="col-span-4 space-y-8">
+<div class="mb-8">
+<h2 class="text-3xl font-bold text-blue-300">智能硬件管理</h2>
+<p class="text-2xl text-slate-400 mt-2">设备状态：<span id="device-status" class="text-yellow-400 font-bold">未连接</span></p>
+<div class="flex gap-4 mt-4">
+<button class="bg-blue-600 px-6 py-3 rounded-xl text-xl font-bold hover:bg-blue-500" onclick="window.location.href='device-connect.html'">搜索设备</button>
+<button class="bg-green-600 px-6 py-3 rounded-xl text-xl font-bold hover:bg-green-500" onclick="connectDevice()">一键连接</button>
+<button class="bg-slate-700 px-6 py-3 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="window.location.href='device-settings.html'">设备设置</button>
+</div>
+</div>
+<div class="space-y-6">
+<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-green-500">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<iconify-icon class="text-5xl text-slate-300" icon="mdi:watch-variant"></iconify-icon>
+<span class="text-3xl font-bold">健康心率手环</span>
+</div>
+<span class="bg-green-900 text-green-400 px-4 py-1 rounded-full text-xl font-bold">在线</span>
+</div>
+<p class="text-xl text-slate-400">电量: 85% | 信号: 强</p>
+</div>
+<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-green-500">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<iconify-icon class="text-5xl text-slate-300" icon="mdi:bed-empty"></iconify-icon>
+<span class="text-3xl font-bold">智能睡眠床垫</span>
+</div>
+<span class="bg-green-900 text-green-400 px-4 py-1 rounded-full text-xl font-bold">在线</span>
+</div>
+<p class="text-xl text-slate-400">状态: 监测中 | 离床预警: 开启</p>
+</div>
+<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-green-500">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<iconify-icon class="text-5xl text-slate-300" icon="mdi:video-outline"></iconify-icon>
+<span class="text-3xl font-bold">门口跌倒监控</span>
+</div>
+<span class="bg-green-900 text-green-400 px-4 py-1 rounded-full text-xl font-bold">在线</span>
+</div>
+<p class="text-xl text-slate-400">AI检测中 | 无人活动</p>
+</div>
+<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-slate-600 opacity-60">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-4">
+<iconify-icon class="text-5xl text-slate-300" icon="mdi:water-boiler"></iconify-icon>
+<span class="text-3xl font-bold">智能燃气感应器</span>
+</div>
+<span class="bg-slate-700 text-slate-400 px-4 py-1 rounded-full text-xl font-bold">离线</span>
+</div>
+<p class="text-xl text-slate-400">最后在线: 2小时前 | 建议检查电池</p>
+</div>
+</div>
+</div>
+<!-- 中间：活动轨迹地图 -->
+<div class="col-span-8 space-y-8">
+<div class="flex justify-between items-end">
+<h2 class="text-3xl font-bold text-yellow-400">老人活动轨迹可视化</h2>
+<div class="flex gap-4">
+<button class="bg-slate-800 px-6 py-2 rounded-xl text-xl" onclick="window.location.href='indoor-monitor.html'">室内</button>
+<button class="bg-blue-600 px-6 py-2 rounded-xl text-xl font-bold" onclick="window.location.href='outdoor-monitor.html'">室外</button>
+</div>
+</div>
+<div class="high-contrast-card rounded-3xl p-4 h-[600px] map-placeholder overflow-hidden">
+<!-- 模拟地图内容 -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<p class="text-3xl text-slate-600 opacity-30 font-black">社区地图视图模拟</p>
+</div>
+<!-- 模拟轨迹线 -->
+<div class="track-line w-40 left-1/4 top-1/2 rotate-45"></div>
+<div class="track-line w-60 left-[40%] top-[70%] -rotate-12"></div>
+<!-- 轨迹点 -->
+<div class="track-point left-1/4 top-1/2"></div>
+<div class="track-point left-[40%] top-[70%]"></div>
+<div class="track-point left-[65%] top-[65%] scale-150 border-4 border-white bg-red-500 shadow-[0_0_20px_red]">
+<div class="absolute -top-16 -left-10 bg-white text-black px-4 py-2 rounded-lg text-xl font-bold whitespace-nowrap">
+                        当前位置：社区凉亭
+                    </div>
+</div>
+<!-- 右侧位置日志 -->
+<div class="absolute right-8 top-8 w-64 bg-slate-900/90 p-6 rounded-2xl border-2 border-slate-700">
+<h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2">今日轨迹摘要</h3>
+<ul class="space-y-4 text-lg">
+<li class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded-full"></span> 08:30 出门</li>
+<li class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded-full"></span> 09:00 社区超市</li>
+<li class="flex items-center gap-2"><span class="w-3 h-3 bg-yellow-500 rounded-full"></span> 10:15 凉亭(停留中)</li>
+</ul>
+</div>
+</div>
+<!-- 异常预警历史 -->
+<div class="high-contrast-card rounded-3xl p-8">
+<h2 class="text-3xl font-bold mb-6 text-red-400">异常预警记录 (最近7天)</h2>
+<table class="w-full text-left text-2xl">
+<thead class="text-slate-400 border-b-2 border-slate-700">
+<tr>
+<th class="py-4 px-4">时间</th>
+<th class="py-4 px-4">报警类型</th>
+<th class="py-4 px-4">详情</th>
+<th class="py-4 px-4">处置状态</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<tr>
+<td class="py-6 px-4">03-29 02:15</td>
+<td class="py-6 px-4 text-yellow-400">心率过快</td>
+<td class="py-6 px-4 text-lg">心率突增至 115bpm，持续3分钟</td>
+<td class="py-6 px-4"><span class="bg-green-900 text-green-400 px-4 py-1 rounded-lg">自动处理</span></td>
+</tr>
+<tr>
+<td class="py-6 px-4">03-25 10:30</td>
+<td class="py-6 px-4 text-red-500">紧急呼叫</td>
+<td class="py-6 px-4 text-lg">老人主动触发一键报警</td>
+<td class="py-6 px-4"><span class="bg-blue-900 text-blue-400 px-4 py-1 rounded-lg">人工核实完成</span></td>
+</tr>
+<tr>
+<td class="py-6 px-4">03-24 18:20</td>
+<td class="py-6 px-4 text-orange-400">轨迹异常</td>
+<td class="py-6 px-4 text-lg">离开社区围栏范围 (已回家)</td>
+<td class="py-6 px-4"><span class="bg-green-900 text-green-400 px-4 py-1 rounded-lg">已解除</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<script>
+        // 连接设备功能
+        function connectDevice() {
+            // 显示加载动画
+            const loadingPopup = document.createElement('div');
+            loadingPopup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            loadingPopup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-green-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center text-green-400">正在连接设备...</h3>
+                    <div class="flex justify-center">
+                        <div class="w-20 h-20 border-8 border-t-green-500 border-r-green-500 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+                    </div>
+                    <p class="text-2xl text-center mt-6">请稍候，正在与设备配对...</p>
+                </div>
+            `;
+            document.body.appendChild(loadingPopup);
+
+            // 模拟连接过程
+            setTimeout(() => {
+                loadingPopup.remove();
+                
+                // 显示连接成功提示
+                const successPopup = document.createElement('div');
+                successPopup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+                successPopup.innerHTML = `
+                    <div class="bg-slate-800 p-8 rounded-3xl border-4 border-green-500 max-w-md w-full">
+                        <h3 class="text-3xl font-bold mb-6 text-center text-green-400">连接成功</h3>
+                        <p class="text-2xl text-center mb-6">设备已成功连接</p>
+                        <button class="w-full bg-green-600 p-4 rounded-xl text-xl font-bold hover:bg-green-500" onclick="this.parentElement.parentElement.remove(); updateDeviceStatus()">确认</button>
+                    </div>
+                `;
+                document.body.appendChild(successPopup);
+            }, 1500);
+        }
+
+        // 更新设备状态
+        function updateDeviceStatus() {
+            const statusElement = document.getElementById('device-status');
+            statusElement.textContent = '已连接';
+            statusElement.className = 'text-green-400 font-bold';
+        }
+
+        // 轨迹监控跳转
+        function goToTrackMap() {
+            window.location.href = 'track-map.html';
+        }
+
+        // 为轨迹地图区域添加点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const mapContainer = document.querySelector('.map-placeholder');
+            if (mapContainer) {
+                mapContainer.style.cursor = 'pointer';
+                mapContainer.addEventListener('click', goToTrackMap);
+            }
+        });
+    </script>
+</body>
+</html>

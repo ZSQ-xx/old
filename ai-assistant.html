@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI陪伴助手 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .message-bubble-user { background-color: #3b82f6; border-radius: 20px 20px 0 20px; }
+        .message-bubble-ai { background-color: #1e293b; border-radius: 20px 20px 20px 0; border: 2px solid #334155; }
+        .quick-action-btn { transition: all 0.3s; }
+        .quick-action-btn:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="p-4 md:p-6">
+<!-- 顶部导航栏 -->
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='index.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-3xl md:text-4xl font-bold tracking-wider">AI陪伴助手</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 中间对话容器 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 mb-6 md:mb-8 min-h-[500px] md:min-h-[600px]">
+<div class="space-y-4 md:space-y-6">
+<!-- AI消息 -->
+<div class="flex gap-3 md:gap-4">
+<div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+<iconify-icon class="text-xl md:text-2xl" icon="mdi:robot"></iconify-icon>
+</div>
+<div class="message-bubble-ai p-4 md:p-6 max-w-[80%]">
+<p class="text-xl md:text-2xl">您好，张爷爷！我是您的AI陪伴助手小云，有什么可以帮您的吗？</p>
+</div>
+</div>
+
+<!-- 用户消息 -->
+<div class="flex gap-3 md:gap-4 justify-end">
+<div class="message-bubble-user p-4 md:p-6 max-w-[80%]">
+<p class="text-xl md:text-2xl">今天天气怎么样？</p>
+</div>
+<div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+<iconify-icon class="text-xl md:text-2xl" icon="mdi:account"></iconify-icon>
+</div>
+</div>
+
+<!-- AI消息 -->
+<div class="flex gap-3 md:gap-4">
+<div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+<iconify-icon class="text-xl md:text-2xl" icon="mdi:robot"></iconify-icon>
+</div>
+<div class="message-bubble-ai p-4 md:p-6 max-w-[80%]">
+<p class="text-xl md:text-2xl">今天天气晴朗，温度22℃，非常适宜外出散步。您需要我为您安排什么活动吗？</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 快捷功能区 -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 mb-6 md:mb-8">
+<button class="quick-action-btn high-contrast-card p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-3 hover:border-blue-500">
+<iconify-icon class="text-3xl md:text-4xl text-blue-400" icon="mdi:pill"></iconify-icon>
+<span class="text-lg md:text-xl font-bold">吃药提醒</span>
+</button>
+<button class="quick-action-btn high-contrast-card p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-3 hover:border-blue-500" onclick="showQuickAction('喝水提醒')">
+<iconify-icon class="text-3xl md:text-4xl text-blue-400" icon="mdi:water"></iconify-icon>
+<span class="text-lg md:text-xl font-bold">喝水提醒</span>
+</button>
+<button class="quick-action-btn high-contrast-card p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-3 hover:border-blue-500" onclick="showQuickAction('娱乐听书')">
+<iconify-icon class="text-3xl md:text-4xl text-blue-400" icon="mdi:headphones"></iconify-icon>
+<span class="text-lg md:text-xl font-bold">娱乐听书</span>
+</button>
+<button class="quick-action-btn high-contrast-card p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-3 hover:border-blue-500" onclick="showQuickAction('天气查询')">
+<iconify-icon class="text-3xl md:text-4xl text-blue-400" icon="mdi:weather-sunny"></iconify-icon>
+<span class="text-lg md:text-xl font-bold">天气查询</span>
+</button>
+<button class="quick-action-btn high-contrast-card p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-3 hover:border-blue-500" onclick="showQuickAction('联系子女')">
+<iconify-icon class="text-3xl md:text-4xl text-blue-400" icon="mdi:phone"></iconify-icon>
+<span class="text-lg md:text-xl font-bold">联系子女</span>
+</button>
+<button class="quick-action-btn high-contrast-card p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-3 hover:border-green-500" onclick="startPhoneCall()">
+<iconify-icon class="text-3xl md:text-4xl text-green-400" icon="mdi:phone-in-talk"></iconify-icon>
+<span class="text-lg md:text-xl font-bold">电话聊天</span>
+</button>
+</div>
+
+<!-- 底部输入区域 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 flex gap-3 md:gap-4">
+<input id="message-input" class="flex-1 bg-slate-800 border-2 border-slate-600 rounded-2xl p-3 md:p-4 text-xl md:text-2xl" placeholder="请输入您的问题..." onkeypress="if(event.key === 'Enter') sendMessage()"/>
+<button class="action-button w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center" onclick="sendMessage()">
+<iconify-icon class="text-2xl md:text-3xl" icon="mdi:send"></iconify-icon>
+</button>
+<button class="bg-slate-700 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center" onclick="startVoiceInput()">
+<iconify-icon class="text-2xl md:text-3xl" icon="mdi:microphone"></iconify-icon>
+</button>
+</div>
+</main>
+
+<script>
+        // 快捷功能按钮点击事件
+        function showQuickAction(action) {
+            try {
+                // 显示用户消息
+                displayUserMessage(action);
+                
+                // 模拟AI思考过程
+                showTypingIndicator();
+                
+                // 生成AI回应
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    const aiResponse = generateAIResponse(action);
+                    displayAIMessage(aiResponse);
+                }, 1500);
+            } catch (error) {
+                console.error('快捷功能触发失败:', error);
+                showErrorMessage('操作失败，请重试');
+            }
+        }
+
+        // 电话聊天功能
+        function startPhoneCall() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-green-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center text-green-400">AI电话聊天</h3>
+                    <div class="flex flex-col items-center gap-6">
+                        <div class="w-32 h-32 rounded-full bg-green-900/50 flex items-center justify-center">
+                            <iconify-icon class="text-6xl text-green-400" icon="mdi:phone-in-talk"></iconify-icon>
+                        </div>
+                        <p class="text-2xl text-center">正在呼叫AI助手...</p>
+                        <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                            <div class="bg-green-500 h-full w-0" id="call-progress"></div>
+                        </div>
+                        <button class="w-full bg-red-600 p-4 rounded-xl text-2xl font-bold hover:bg-red-500" onclick="endCall(this)">结束通话</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // 模拟通话连接过程
+            const progressBar = document.getElementById('call-progress');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    document.querySelector('.text-2xl.text-center').textContent = '通话中...';
+                } else {
+                    width += 5;
+                    progressBar.style.width = width + '%';
+                }
+            }, 100);
+        }
+
+        // 结束通话
+        function endCall(button) {
+            button.parentElement.parentElement.parentElement.remove();
+            alert('通话已结束');
+        }
+
+        // 发送消息
+        function sendMessage() {
+            try {
+                const inputElement = document.getElementById('message-input');
+                const message = inputElement.value.trim();
+                
+                if (!message) {
+                    showErrorMessage('请输入您的问题');
+                    return;
+                }
+                
+                // 显示用户消息
+                displayUserMessage(message);
+                
+                // 清空输入框
+                inputElement.value = '';
+                
+                // 模拟AI思考过程
+                showTypingIndicator();
+                
+                // 生成AI回应
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    const aiResponse = generateAIResponse(message);
+                    displayAIMessage(aiResponse);
+                }, 1500);
+            } catch (error) {
+                console.error('发送消息失败:', error);
+                showErrorMessage('发送消息失败，请重试');
+            }
+        }
+
+        // 开始语音输入
+        function startVoiceInput() {
+            try {
+                showInfoMessage('正在倾听...');
+                // 这里可以添加实际的语音识别逻辑
+                setTimeout(() => {
+                    const voiceMessage = '今天天气怎么样？';
+                    displayUserMessage(voiceMessage);
+                    
+                    // 模拟AI思考过程
+                    showTypingIndicator();
+                    
+                    // 生成AI回应
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        const aiResponse = generateAIResponse(voiceMessage);
+                        displayAIMessage(aiResponse);
+                    }, 1500);
+                }, 2000);
+            } catch (error) {
+                console.error('语音输入失败:', error);
+                showErrorMessage('语音输入失败，请重试');
+            }
+        }
+
+        // 显示用户消息
+        function displayUserMessage(message) {
+            const chatContainer = document.querySelector('.space-y-6');
+            const messageElement = document.createElement('div');
+            messageElement.className = 'flex gap-4 justify-end';
+            messageElement.innerHTML = `
+                <div class="message-bubble-user p-6 max-w-[80%]">
+                    <p class="text-2xl">${message}</p>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+                    <iconify-icon class="text-2xl" icon="mdi:account"></iconify-icon>
+                </div>
+            `;
+            chatContainer.appendChild(messageElement);
+            scrollToBottom();
+        }
+
+        // 显示AI消息
+        function displayAIMessage(message) {
+            const chatContainer = document.querySelector('.space-y-6');
+            const messageElement = document.createElement('div');
+            messageElement.className = 'flex gap-4';
+            messageElement.innerHTML = `
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+                    <iconify-icon class="text-2xl" icon="mdi:robot"></iconify-icon>
+                </div>
+                <div class="message-bubble-ai p-6 max-w-[80%]">
+                    <p class="text-2xl">${message}</p>
+                </div>
+            `;
+            chatContainer.appendChild(messageElement);
+            scrollToBottom();
+        }
+
+        // 显示AI正在输入的指示器
+        function showTypingIndicator() {
+            const chatContainer = document.querySelector('.space-y-6');
+            const typingElement = document.createElement('div');
+            typingElement.className = 'flex gap-4';
+            typingElement.id = 'typing-indicator';
+            typingElement.innerHTML = `
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
+                    <iconify-icon class="text-2xl" icon="mdi:robot"></iconify-icon>
+                </div>
+                <div class="message-bubble-ai p-6 max-w-[80%]">
+                    <p class="text-2xl">正在思考...</p>
+                </div>
+            `;
+            chatContainer.appendChild(typingElement);
+            scrollToBottom();
+        }
+
+        // 移除AI正在输入的指示器
+        function removeTypingIndicator() {
+            const typingElement = document.getElementById('typing-indicator');
+            if (typingElement) {
+                typingElement.remove();
+            }
+        }
+
+        // 生成AI回应
+        function generateAIResponse(userMessage) {
+            // 简单的关键词匹配逻辑
+            userMessage = userMessage.toLowerCase();
+            
+            if (userMessage.includes('天气')) {
+                return '今天天气晴朗，温度22℃，非常适宜外出散步。您需要我为您安排什么活动吗？';
+            } else if (userMessage.includes('吃药') || userMessage.includes('药物')) {
+                return '您今天需要在11:00服用降压药，记得按时服药哦。需要我设置提醒吗？';
+            } else if (userMessage.includes('喝水') || userMessage.includes('口渴')) {
+                return '建议您现在喝一杯水，保持身体水分。需要我设置定时喝水提醒吗？';
+            } else if (userMessage.includes('子女') || userMessage.includes('家人')) {
+                return '您的子女张晓明最近一次联系是在昨天，他说会在本周末来看您。需要我帮您联系他吗？';
+            } else if (userMessage.includes('娱乐') || userMessage.includes('听书') || userMessage.includes('音乐')) {
+                return '我可以为您播放秦腔、京剧或者轻音乐，您想听什么呢？';
+            } else if (userMessage.includes('时间')) {
+                const now = new Date();
+                const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+                return `现在是${timeStr}，您有什么需要帮助的吗？`;
+            } else if (userMessage.includes('你好') || userMessage.includes('您好') || userMessage.includes('hi') || userMessage.includes('hello')) {
+                return '您好，张爷爷！我是您的AI陪伴助手小云，有什么可以帮您的吗？';
+            } else {
+                return '我不太明白您的意思，您可以问我关于天气、吃药提醒、喝水提醒、联系子女、娱乐听书等方面的问题，或者使用下方的快捷功能按钮。';
+            }
+        }
+
+        // 滚动到底部
+        function scrollToBottom() {
+            const chatContainer = document.querySelector('.high-contrast-card');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // 显示错误消息
+        function showErrorMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-8 py-4 rounded-xl text-2xl font-bold z-50';
+            notification.textContent = message || '操作失败';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // 显示信息消息
+        function showInfoMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-8 py-4 rounded-xl text-2xl font-bold z-50';
+            notification.textContent = message || '信息';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>社区服务预约 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .service-card { transition: all 0.3s; cursor: pointer; }
+        .service-card:hover { border-color: #facc15; transform: translateY(-5px); }
+        .category-active { background-color: #facc15; color: #000000; }
+        .category-inactive { background-color: #1e293b; color: #ffffff; }
+    </style>
+</head>
+<body class="p-6">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-6" onclick="window.location.href='service.html'">
+<iconify-icon class="text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-4xl font-bold tracking-wider">社区服务预约</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 服务分类 -->
+<div class="flex flex-wrap gap-4 mb-8">
+<button class="category-active px-8 py-4 rounded-xl text-2xl font-bold" onclick="switchCategory('nursing')">上门护理</button>
+<button class="category-inactive px-8 py-4 rounded-xl text-2xl font-bold" onclick="switchCategory('meal')">助餐服务</button>
+<button class="category-inactive px-8 py-4 rounded-xl text-2xl font-bold" onclick="switchCategory('cleaning')">日常保洁</button>
+<button class="category-inactive px-8 py-4 rounded-xl text-2xl font-bold" onclick="switchCategory('checkup')">慢病体检</button>
+</div>
+
+<!-- 服务人员卡片 -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<!-- 服务人员1 -->
+<div class="high-contrast-card service-card rounded-3xl p-6">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-24 h-24 rounded-full bg-blue-900/50 flex items-center justify-center">
+<iconify-icon class="text-5xl text-blue-400" icon="mdi:account-nurse"></iconify-icon>
+</div>
+<div>
+<h3 class="text-3xl font-bold">李护士</h3>
+<p class="text-xl text-slate-400">专业护理员</p>
+<p class="text-xl text-green-400">★★★★★</p>
+</div>
+</div>
+<p class="text-xl mb-6">擅长：老人日常护理、伤口处理、康复指导</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-blue-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-blue-500" onclick="bookTime('李护士')">预约时间</button>
+<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="onlineConsult('李护士')">在线咨询</button>
+<button class="bg-green-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-green-500" onclick="contactNurse('李护士')">联系医护</button>
+</div>
+</div>
+
+<!-- 服务人员2 -->
+<div class="high-contrast-card service-card rounded-3xl p-6">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-24 h-24 rounded-full bg-green-900/50 flex items-center justify-center">
+<iconify-icon class="text-5xl text-green-400" icon="mdi:account-nurse"></iconify-icon>
+</div>
+<div>
+<h3 class="text-3xl font-bold">王护理</h3>
+<p class="text-xl text-slate-400">资深护理员</p>
+<p class="text-xl text-green-400">★★★★☆</p>
+</div>
+</div>
+<p class="text-xl mb-6">擅长：老人日常护理、营养餐搭配、心理疏导</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-blue-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-blue-600" onclick="bookTime('王护理')">预约时间</button>
+<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="onlineConsult('王护理')">在线咨询</button>
+<button class="bg-green-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-green-500" onclick="contactNurse('王护理')">联系医护</button>
+</div>
+</div>
+
+<!-- 服务人员3 -->
+<div class="high-contrast-card service-card rounded-3xl p-6">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-24 h-24 rounded-full bg-purple-900/50 flex items-center justify-center">
+<iconify-icon class="text-5xl text-purple-400" icon="mdi:account-nurse"></iconify-icon>
+</div>
+<div>
+<h3 class="text-3xl font-bold">张医生</h3>
+<p class="text-xl text-slate-400">社区医生</p>
+<p class="text-xl text-green-400">★★★★★</p>
+</div>
+</div>
+<p class="text-xl mb-6">擅长：慢性病管理、健康咨询、用药指导</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-blue-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-blue-600" onclick="bookTime('张医生')">预约时间</button>
+<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="onlineConsult('张医生')">在线咨询</button>
+<button class="bg-green-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-green-500" onclick="contactNurse('张医生')">联系医护</button>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        // 切换服务分类
+        function switchCategory(category) {
+            // 切换分类按钮样式
+            document.querySelectorAll('button').forEach(btn => {
+                if (btn.textContent.trim() === '上门护理' || btn.textContent.trim() === '助餐服务' || btn.textContent.trim() === '日常保洁' || btn.textContent.trim() === '慢病体检') {
+                    btn.className = 'category-inactive px-8 py-4 rounded-xl text-2xl font-bold';
+                }
+            });
+            event.target.className = 'category-active px-8 py-4 rounded-xl text-2xl font-bold';
+            
+            // 这里可以添加切换服务人员列表的逻辑
+            alert(`切换到${category === 'nursing' ? '上门护理' : category === 'meal' ? '助餐服务' : category === 'cleaning' ? '日常保洁' : '慢病体检'}服务`);
+        }
+
+        // 预约时间
+        function bookTime(nurseName) {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-blue-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center text-blue-300">预约${nurseName}的服务时间</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl">日期</span>
+                            <input type="date" class="bg-slate-700 text-2xl px-4 py-2 rounded-xl">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl">时间</span>
+                            <input type="time" class="bg-slate-700 text-2xl px-4 py-2 rounded-xl">
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-blue-600 p-4 rounded-xl text-xl font-bold hover:bg-blue-500" onclick="this.parentElement.parentElement.parentElement.remove(); alert('预约成功')">确认预约</button>
+                        <button class="flex-1 bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 在线咨询
+        function onlineConsult(nurseName) {
+            alert(`正在连接${nurseName}进行在线咨询...`);
+            // 这里可以添加在线咨询的逻辑
+        }
+
+        // 联系医护
+        function contactNurse(nurseName) {
+            alert(`正在拨打${nurseName}的电话...`);
+            // 这里可以添加联系医护的逻辑
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>医疗助医服务 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+    </style>
+</head>
+<body class="p-6">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-6" onclick="window.location.href='service.html'">
+<iconify-icon class="text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-4xl font-bold tracking-wider">医疗助医服务</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 服务介绍 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-blue-400">服务介绍</h2>
+<p class="text-2xl leading-relaxed">医疗助医服务为老年人提供专业的医疗协助，包括陪同就诊、代取药品、健康监测等服务，确保老年人能够及时获得必要的医疗照顾。</p>
+</div>
+
+<!-- 服务内容 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-blue-400">服务内容</h2>
+<ul class="space-y-4 text-2xl">
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-blue-400" icon="mdi:check-circle"></iconify-icon>
+<span>陪同就诊（医院挂号、检查、取药等）</span>
+</li>
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-blue-400" icon="mdi:check-circle"></iconify-icon>
+<span>代取药品（社区医院、药店）</span>
+</li>
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-blue-400" icon="mdi:check-circle"></iconify-icon>
+<span>健康监测（血压、血糖、体温等）</span>
+</li>
+<li class="flex items-center gap-4">
+<iconify-icon class="text-3xl text-blue-400" icon="mdi:check-circle"></iconify-icon>
+<span>用药指导（药品服用时间、剂量等）</span>
+</li>
+</ul>
+</div>
+
+<!-- 服务人员 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-blue-400">服务人员</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-slate-800 p-6 rounded-2xl flex items-center gap-4">
+<div class="w-20 h-20 rounded-full bg-blue-900/50 flex items-center justify-center">
+<iconify-icon class="text-4xl text-blue-400" icon="mdi:account-nurse"></iconify-icon>
+</div>
+<div>
+<h3 class="text-2xl font-bold">王医生</h3>
+<p class="text-xl text-slate-400">社区医生，有10年临床经验</p>
+<p class="text-xl text-green-400">★★★★★</p>
+</div>
+</div>
+<div class="bg-slate-800 p-6 rounded-2xl flex items-center gap-4">
+<div class="w-20 h-20 rounded-full bg-blue-900/50 flex items-center justify-center">
+<iconify-icon class="text-4xl text-blue-400" icon="mdi:account-nurse"></iconify-icon>
+</div>
+<div>
+<h3 class="text-2xl font-bold">李护士</h3>
+<p class="text-xl text-slate-400">专业护理员，有8年护理经验</p>
+<p class="text-xl text-green-400">★★★★☆</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 预约表单 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-blue-400">预约服务</h2>
+<div class="space-y-6">
+<div class="flex flex-col md:flex-row gap-4">
+<div class="flex-1">
+<label class="block text-2xl mb-4">预约日期</label>
+<input type="date" class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full">
+</div>
+<div class="flex-1">
+<label class="block text-2xl mb-4">服务类型</label>
+<select class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full">
+<option>陪同就诊</option>
+<option>代取药品</option>
+<option>健康监测</option>
+<option>用药指导</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-2xl mb-4">就诊医院/药店</label>
+<input type="text" class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full" placeholder="请输入医院或药店名称">
+</div>
+<div>
+<label class="block text-2xl mb-4">备注</label>
+<textarea class="bg-slate-800 text-2xl px-4 py-3 rounded-xl w-full" rows="4" placeholder="请输入具体需求或注意事项"></textarea>
+</div>
+<div class="flex gap-4">
+<button class="action-button flex-1 py-4 rounded-xl text-2xl font-bold" onclick="bookService()">确认预约</button>
+<button class="bg-slate-700 flex-1 py-4 rounded-xl text-2xl font-bold" onclick="window.location.href='service.html'">取消</button>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        function bookService() {
+            alert('预约成功！服务人员将在预约时间联系您。');
+            window.location.href='service.html';
+        }
+    </script>
+</body>
+</html>

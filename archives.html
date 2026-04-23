@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>档案存储 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+    </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='service.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">老人关怀档案</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 档案信息卡片 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-blue-300">基本信息</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">姓名</span>
+<span class="text-xl md:text-2xl font-bold">张爷爷</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">年龄</span>
+<span class="text-xl md:text-2xl font-bold">78岁</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">性别</span>
+<span class="text-xl md:text-2xl font-bold">男</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">身份证号</span>
+<span class="text-xl md:text-2xl font-bold">1101**********1234</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">联系电话</span>
+<span class="text-xl md:text-2xl font-bold">138****5678</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">家庭住址</span>
+<span class="text-xl md:text-2xl font-bold">北京市朝阳区某街道某小区</span>
+</div>
+</div>
+</div>
+
+<!-- 健康档案 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-green-400">健康档案</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">既往病史</span>
+<span class="text-xl md:text-2xl font-bold">高血压、糖尿病</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">当前用药</span>
+<span class="text-xl md:text-2xl font-bold">降压药、降糖药</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">过敏史</span>
+<span class="text-xl md:text-2xl font-bold">青霉素</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">最近体检</span>
+<span class="text-xl md:text-2xl font-bold">2026-03-15</span>
+</div>
+</div>
+</div>
+
+<!-- 服务记录 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8 overflow-x-auto">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-yellow-400">服务记录</h2>
+<div class="hidden md:block">
+<table class="w-full text-left text-xl">
+<thead class="text-slate-400 border-b-2 border-slate-700">
+<tr>
+<th class="py-3 md:py-4 px-2 md:px-4">时间</th>
+<th class="py-3 md:py-4 px-2 md:px-4">服务类型</th>
+<th class="py-3 md:py-4 px-2 md:px-4">服务人员</th>
+<th class="py-3 md:py-4 px-2 md:px-4">服务状态</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<tr>
+<td class="py-4 md:py-6 px-2 md:px-4">2026-03-28</td>
+<td class="py-4 md:py-6 px-2 md:px-4">居家助洁</td>
+<td class="py-4 md:py-6 px-2 md:px-4">李阿姨</td>
+<td class="py-4 md:py-6 px-2 md:px-4"><span class="bg-green-900 text-green-400 px-2 md:px-4 py-1 rounded-lg text-base md:text-lg">已完成</span></td>
+</tr>
+<tr>
+<td class="py-4 md:py-6 px-2 md:px-4">2026-03-25</td>
+<td class="py-4 md:py-6 px-2 md:px-4">医疗助医</td>
+<td class="py-4 md:py-6 px-2 md:px-4">王医生</td>
+<td class="py-4 md:py-6 px-2 md:px-4"><span class="bg-green-900 text-green-400 px-2 md:px-4 py-1 rounded-lg text-base md:text-lg">已完成</span></td>
+</tr>
+<tr>
+<td class="py-4 md:py-6 px-2 md:px-4">2026-03-20</td>
+<td class="py-4 md:py-6 px-2 md:px-4">社区助餐</td>
+<td class="py-4 md:py-6 px-2 md:px-4">张师傅</td>
+<td class="py-4 md:py-6 px-2 md:px-4"><span class="bg-green-900 text-green-400 px-2 md:px-4 py-1 rounded-lg text-base md:text-lg">已完成</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 移动端卡片视图 -->
+<div class="md:hidden space-y-4">
+<div class="bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-lg text-slate-400">2026-03-28</span>
+<span class="bg-green-900 text-green-400 px-3 py-1 rounded-lg">已完成</span>
+</div>
+<p class="text-xl font-bold mb-1">居家助洁</p>
+<p class="text-lg text-slate-400">服务人员：李阿姨</p>
+</div>
+<div class="bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-lg text-slate-400">2026-03-25</span>
+<span class="bg-green-900 text-green-400 px-3 py-1 rounded-lg">已完成</span>
+</div>
+<p class="text-xl font-bold mb-1">医疗助医</p>
+<p class="text-lg text-slate-400">服务人员：王医生</p>
+</div>
+<div class="bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-lg text-slate-400">2026-03-20</span>
+<span class="bg-green-900 text-green-400 px-3 py-1 rounded-lg">已完成</span>
+</div>
+<p class="text-xl font-bold mb-1">社区助餐</p>
+<p class="text-lg text-slate-400">服务人员：张师傅</p>
+</div>
+</div>
+</div>
+
+<!-- 紧急联系人 -->
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-red-400">紧急联系人</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">子女</span>
+<span class="text-xl md:text-2xl font-bold">张晓明 (139****1234)</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+<span class="text-xl md:text-2xl">社区医生</span>
+<span class="text-xl md:text-2xl font-bold">李护士 (137****5678)</span>
+</div>
+</div>
+</div>
+</main>
+</body>
+</html>

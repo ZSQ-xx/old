@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>实时位置监控 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .map-placeholder { background-color: #1e293b; background-image: radial-gradient(#334155 1px, transparent 1px); background-size: 20px 20px; position: relative; }
+        .track-point { width: 16px; height: 16px; background-color: #facc15; border-radius: 50%; position: absolute; box-shadow: 0 0 15px #facc15; }
+        .track-line { border-bottom: 4px dashed #facc15; opacity: 0.3; position: absolute; }
+        .current-position { width: 20px; height: 20px; background-color: #ef4444; border-radius: 50%; position: absolute; box-shadow: 0 0 20px #ef4444; border: 3px solid #ffffff; }
+        @media (min-width: 768px) {
+            .track-point { width: 20px; height: 20px; }
+            .current-position { width: 24px; height: 24px; border: 4px solid #ffffff; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-6 min-h-screen">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='device.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">实时位置监控</h1>
+</header>
+
+<main class="max-w-[1400px] mx-auto">
+<!-- 地图容器 -->
+<div class="map-placeholder rounded-3xl p-3 md:p-4 h-[400px] md:h-[600px] mb-6 md:mb-8 relative overflow-hidden">
+<!-- 模拟地图内容 -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<p class="text-xl md:text-3xl text-slate-600 opacity-30 font-black">社区地图视图模拟</p>
+</div>
+
+<!-- 模拟轨迹线 -->
+<div class="track-line w-24 md:w-40 left-1/4 top-1/2 rotate-45"></div>
+<div class="track-line w-32 md:w-60 left-[40%] top-[70%] -rotate-12"></div>
+
+<!-- 轨迹点 -->
+<div class="track-point left-1/4 top-1/2"></div>
+<div class="track-point left-[40%] top-[70%]"></div>
+
+<!-- 当前位置 -->
+<div class="current-position left-[65%] top-[65%]">
+<div class="absolute -top-12 md:-top-16 -left-8 md:-left-10 bg-white text-black px-2 md:px-4 py-1 md:py-2 rounded-lg text-base md:text-xl font-bold whitespace-nowrap">
+                        当前位置：社区凉亭
+                    </div>
+</div>
+
+<!-- 功能按钮 -->
+<div class="absolute top-3 md:top-6 left-3 md:left-6 space-y-2 md:space-y-4">
+<button class="bg-blue-600 p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold hover:bg-blue-500 flex items-center gap-2" onclick="toggleRealTime()">
+<iconify-icon class="text-xl md:text-2xl" icon="mdi:crosshairs-gps"></iconify-icon> <span class="hidden sm:inline">开启实时定位</span><span class="sm:hidden">定位</span>
+</button>
+<button class="bg-green-600 p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold hover:bg-green-500 flex items-center gap-2" onclick="drawSafeArea()">
+<iconify-icon class="text-xl md:text-2xl" icon="mdi:shape"></iconify-icon> <span class="hidden sm:inline">划定安全区域</span><span class="sm:hidden">安全区</span>
+</button>
+<button class="bg-slate-700 p-3 md:p-4 rounded-xl text-lg md:text-xl font-bold hover:bg-slate-600 flex items-center gap-2" onclick="clearTrack()">
+<iconify-icon class="text-xl md:text-2xl" icon="mdi:delete"></iconify-icon> <span class="hidden sm:inline">清空今日轨迹</span><span class="sm:hidden">清空</span>
+</button>
+</div>
+
+<!-- 右侧位置日志 -->
+<div class="absolute right-2 md:right-8 top-2 md:top-8 w-44 md:w-64 bg-slate-900/90 p-3 md:p-6 rounded-2xl border-2 border-slate-700">
+<h3 class="text-lg md:text-xl font-bold mb-2 md:mb-4 border-b border-slate-700 pb-2">今日轨迹摘要</h3>
+<ul class="space-y-2 md:space-y-4 text-base md:text-lg">
+<li class="flex items-center gap-2"><span class="w-2 h-2 md:w-3 md:h-3 bg-blue-500 rounded-full"></span> 08:30 出门</li>
+<li class="flex items-center gap-2"><span class="w-2 h-2 md:w-3 md:h-3 bg-blue-500 rounded-full"></span> 09:00 社区超市</li>
+<li class="flex items-center gap-2"><span class="w-2 h-2 md:w-3 md:h-3 bg-yellow-500 rounded-full"></span> 10:15 凉亭(停留中)</li>
+</ul>
+</div>
+</div>
+</main>
+
+<script>
+        // 开启实时定位
+        function toggleRealTime() {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-8 py-4 rounded-xl text-xl font-bold z-50';
+            notification.textContent = '实时定位已开启';
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // 划定安全区域
+        function drawSafeArea() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border-4 border-green-500 max-w-md w-full mx-4">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-green-400">划定安全区域</h3>
+                    <p class="text-xl md:text-2xl text-center mb-6 md:mb-8">请在地图上点击并拖动以绘制安全区域</p>
+                    <button class="w-full bg-green-600 p-3 md:p-4 rounded-xl text-xl font-bold hover:bg-green-500" onclick="this.parentElement.parentElement.remove(); showSuccessMessage('安全区域已设置')">确认</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 清空今日轨迹
+        function clearTrack() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-6 md:p-8 rounded-3xl border-4 border-yellow-500 max-w-md w-full mx-4">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center text-yellow-400">确认清空轨迹</h3>
+                    <p class="text-xl md:text-2xl text-center mb-6 md:mb-8">清空后今日轨迹将被删除，确定要清空吗？</p>
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-slate-700 p-3 md:p-4 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
+                        <button class="flex-1 bg-yellow-600 p-3 md:p-4 rounded-xl text-xl font-bold hover:bg-yellow-500" onclick="this.parentElement.parentElement.parentElement.remove(); showSuccessMessage('今日轨迹已清空')">确认</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 显示成功消息
+        function showSuccessMessage(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-8 py-4 rounded-xl text-xl font-bold z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

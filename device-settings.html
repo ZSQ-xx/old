@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>设备管理设置 - 养老云生活</title>
+<script src="https://modao.cc/agent-py/static/source/js/tailwindcss.3.4.3.js"></script>
+<script src="https://modao.cc/agent-py/static/source/js/iconify-icon.min.1.0.7.js"></script>
+<style>
+        body { background-color: #0f172a; color: #ffffff; font-family: "Microsoft YaHei", sans-serif; }
+        .high-contrast-card { background-color: #1e293b; border: 3px solid #334155; }
+        .action-button { background-color: #facc15; color: #000000; transition: all 0.3s; }
+        .action-button:hover { background-color: #fde047; transform: scale(1.05); }
+        .toggle-switch { position: relative; display: inline-block; width: 80px; height: 40px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 40px; }
+        .toggle-slider:before { position: absolute; content: ""; height: 32px; width: 32px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .toggle-slider { background-color: #3b82f6; }
+        input:checked + .toggle-slider:before { transform: translateX(40px); }
+    </style>
+</head>
+<body class="p-6">
+<!-- 顶部导航 -->
+<header class="flex items-center mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-6" onclick="window.location.href='device.html'">
+<iconify-icon class="text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+</button>
+<h1 class="text-4xl font-bold tracking-wider">设备管理设置</h1>
+</header>
+
+<main class="max-w-[1200px] mx-auto">
+<!-- 基础设置 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-blue-300">基础设置</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">设备名称</h3>
+<p class="text-xl text-slate-400">健康监测手环</p>
+</div>
+<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600">修改</button>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">音量调节</h3>
+<p class="text-xl text-slate-400">70%</p>
+</div>
+<input type="range" min="0" max="100" value="70" class="w-40 h-4 bg-slate-700 rounded-lg appearance-none cursor-pointer" style="accent-color: #3b82f6;">
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">震动开关</h3>
+<p class="text-xl text-slate-400">开启</p>
+</div>
+<label class="toggle-switch">
+<input type="checkbox" checked onclick="toggleSwitch(this)">
+<span class="toggle-slider"></span>
+</label>
+</div>
+</div>
+</div>
+
+<!-- 告警设置 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-yellow-400">告警设置</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">低电量提醒</h3>
+<p class="text-xl text-slate-400">当电量低于20%时提醒</p>
+</div>
+<label class="toggle-switch">
+<input type="checkbox" checked onclick="toggleSwitch(this)">
+<span class="toggle-slider"></span>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">离线提醒</h3>
+<p class="text-xl text-slate-400">设备离线时提醒</p>
+</div>
+<label class="toggle-switch">
+<input type="checkbox" checked onclick="toggleSwitch(this)">
+<span class="toggle-slider"></span>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">异常体征告警</h3>
+<p class="text-xl text-slate-400">检测到异常时告警</p>
+</div>
+<label class="toggle-switch">
+<input type="checkbox" checked onclick="toggleSwitch(this)">
+<span class="toggle-slider"></span>
+</label>
+</div>
+</div>
+</div>
+
+<!-- 绑定管理 -->
+<div class="high-contrast-card rounded-3xl p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-red-400">绑定管理</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">解除设备绑定</h3>
+<p class="text-xl text-slate-400">解除与当前设备的绑定</p>
+</div>
+<button class="bg-red-600 px-6 py-2 rounded-xl text-xl font-bold hover:bg-red-500" onclick="unbindDevice()">解除绑定</button>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-2xl font-bold">恢复出厂设置</h3>
+<p class="text-xl text-slate-400">将设备恢复到出厂状态</p>
+</div>
+<button class="bg-slate-700 px-6 py-2 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="resetDevice()">恢复出厂</button>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+        // 开关按钮切换状态
+        function toggleSwitch(element) {
+            const status = element.checked ? '开启' : '关闭';
+            element.parentElement.previousElementSibling.querySelector('p').textContent = status;
+        }
+
+        // 解除设备绑定
+        function unbindDevice() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-red-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center text-red-400">确认解除绑定</h3>
+                    <p class="text-2xl text-center mb-8">解除绑定后，设备将无法继续使用。确定要解除绑定吗？</p>
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
+                        <button class="flex-1 bg-red-600 p-4 rounded-xl text-xl font-bold hover:bg-red-500" onclick="this.parentElement.parentElement.parentElement.remove(); alert('设备已解除绑定')">确认</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        // 恢复出厂设置
+        function resetDevice() {
+            const popup = document.createElement('div');
+            popup.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50';
+            popup.innerHTML = `
+                <div class="bg-slate-800 p-8 rounded-3xl border-4 border-yellow-500 max-w-md w-full">
+                    <h3 class="text-3xl font-bold mb-6 text-center text-yellow-400">确认恢复出厂设置</h3>
+                    <p class="text-2xl text-center mb-8">恢复出厂设置后，所有数据将被清除。确定要恢复出厂设置吗？</p>
+                    <div class="flex gap-4">
+                        <button class="flex-1 bg-slate-700 p-4 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="this.parentElement.parentElement.parentElement.remove()">取消</button>
+                        <button class="flex-1 bg-yellow-600 p-4 rounded-xl text-xl font-bold hover:bg-yellow-500" onclick="this.parentElement.parentElement.parentElement.remove(); alert('设备已恢复出厂设置')">确认</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+    </script>
+</body>
+</html>
