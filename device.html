@@ -15,142 +15,171 @@
         .track-line { border-bottom: 4px dashed #facc15; opacity: 0.3; position: absolute; }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4 md:p-6 min-h-screen">
 <!-- 顶部导航 -->
-<header class="flex justify-between items-center mb-10 pb-6 border-b-4 border-slate-700">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-6xl text-blue-400" icon="mdi:security"></iconify-icon>
-<h1 class="text-5xl font-bold tracking-wider">智能设备与监控</h1>
+<header class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-10 pb-4 md:pb-6 border-b-4 border-slate-700 gap-4 md:gap-6">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-5xl md:text-6xl text-blue-400" icon="mdi:security"></iconify-icon>
+<h1 class="text-3xl md:text-5xl font-bold tracking-wider">智能设备与监控</h1>
 </div>
-<nav class="flex gap-6">
-<a class="px-8 py-4 high-contrast-card rounded-2xl text-3xl font-bold hover:bg-slate-700" href="index.html">我的主页</a>
-<a class="px-8 py-4 high-contrast-card rounded-2xl text-3xl font-bold hover:bg-slate-700" href="service.html">社会服务</a>
-<a class="px-8 py-4 bg-blue-600 rounded-2xl text-3xl font-bold border-4 border-white" href="device.html">安全监控</a>
+<nav class="flex flex-wrap gap-3 md:gap-6 justify-center">
+<a class="px-4 md:px-8 py-3 md:py-4 high-contrast-card rounded-2xl text-xl md:text-3xl font-bold hover:bg-slate-700" href="index.html">我的主页</a>
+<a class="px-4 md:px-8 py-3 md:py-4 high-contrast-card rounded-2xl text-xl md:text-3xl font-bold hover:bg-slate-700" href="service.html">社会服务</a>
+<a class="px-4 md:px-8 py-3 md:py-4 bg-blue-600 rounded-2xl text-xl md:text-3xl font-bold border-4 border-white" href="device.html">安全监控</a>
 </nav>
 </header>
-<main class="grid grid-cols-12 gap-10">
+<main class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10">
 <!-- 左侧：设备状态列表 -->
-<div class="col-span-4 space-y-8">
-<div class="mb-8">
-<h2 class="text-3xl font-bold text-blue-300">智能硬件管理</h2>
-<p class="text-2xl text-slate-400 mt-2">设备状态：<span id="device-status" class="text-yellow-400 font-bold">未连接</span></p>
-<div class="flex gap-4 mt-4">
-<button class="bg-blue-600 px-6 py-3 rounded-xl text-xl font-bold hover:bg-blue-500" onclick="window.location.href='device-connect.html'">搜索设备</button>
-<button class="bg-green-600 px-6 py-3 rounded-xl text-xl font-bold hover:bg-green-500" onclick="connectDevice()">一键连接</button>
-<button class="bg-slate-700 px-6 py-3 rounded-xl text-xl font-bold hover:bg-slate-600" onclick="window.location.href='device-settings.html'">设备设置</button>
+<div class="col-span-1 lg:col-span-4 space-y-6 md:space-y-8">
+<div class="mb-6 md:mb-8">
+<h2 class="text-2xl md:text-3xl font-bold text-blue-300">智能硬件管理</h2>
+<p class="text-xl md:text-2xl text-slate-400 mt-2">设备状态：<span id="device-status" class="text-yellow-400 font-bold">未连接</span></p>
+<div class="flex flex-wrap gap-3 md:gap-4 mt-4">
+<button class="bg-blue-600 px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg md:text-xl font-bold hover:bg-blue-500" onclick="window.location.href='device-connect.html'">搜索设备</button>
+<button class="bg-green-600 px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg md:text-xl font-bold hover:bg-green-500" onclick="connectDevice()">一键连接</button>
+<button class="bg-slate-700 px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg md:text-xl font-bold hover:bg-slate-600" onclick="window.location.href='device-settings.html'">设备设置</button>
 </div>
 </div>
-<div class="space-y-6">
-<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-green-500">
-<div class="flex justify-between items-start mb-4">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:watch-variant"></iconify-icon>
-<span class="text-3xl font-bold">健康心率手环</span>
+<div class="space-y-4 md:space-y-6">
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 border-l-[8px] md:border-l-[12px] border-l-green-500">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-3 md:mb-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:watch-variant"></iconify-icon>
+<span class="text-2xl md:text-3xl font-bold">健康心率手环</span>
 </div>
-<span class="bg-green-900 text-green-400 px-4 py-1 rounded-full text-xl font-bold">在线</span>
+<span class="bg-green-900 text-green-400 px-3 md:px-4 py-1 rounded-full text-lg md:text-xl font-bold">在线</span>
 </div>
-<p class="text-xl text-slate-400">电量: 85% | 信号: 强</p>
+<p class="text-lg md:text-xl text-slate-400">电量: 85% | 信号: 强</p>
 </div>
-<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-green-500">
-<div class="flex justify-between items-start mb-4">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:bed-empty"></iconify-icon>
-<span class="text-3xl font-bold">智能睡眠床垫</span>
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 border-l-[8px] md:border-l-[12px] border-l-green-500">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-3 md:mb-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:bed-empty"></iconify-icon>
+<span class="text-2xl md:text-3xl font-bold">智能睡眠床垫</span>
 </div>
-<span class="bg-green-900 text-green-400 px-4 py-1 rounded-full text-xl font-bold">在线</span>
+<span class="bg-green-900 text-green-400 px-3 md:px-4 py-1 rounded-full text-lg md:text-xl font-bold">在线</span>
 </div>
-<p class="text-xl text-slate-400">状态: 监测中 | 离床预警: 开启</p>
+<p class="text-lg md:text-xl text-slate-400">状态: 监测中 | 离床预警: 开启</p>
 </div>
-<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-green-500">
-<div class="flex justify-between items-start mb-4">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:video-outline"></iconify-icon>
-<span class="text-3xl font-bold">门口跌倒监控</span>
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 border-l-[8px] md:border-l-[12px] border-l-green-500">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-3 md:mb-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:video-outline"></iconify-icon>
+<span class="text-2xl md:text-3xl font-bold">门口跌倒监控</span>
 </div>
-<span class="bg-green-900 text-green-400 px-4 py-1 rounded-full text-xl font-bold">在线</span>
+<span class="bg-green-900 text-green-400 px-3 md:px-4 py-1 rounded-full text-lg md:text-xl font-bold">在线</span>
 </div>
-<p class="text-xl text-slate-400">AI检测中 | 无人活动</p>
+<p class="text-lg md:text-xl text-slate-400">AI检测中 | 无人活动</p>
 </div>
-<div class="high-contrast-card rounded-3xl p-6 border-l-[12px] border-l-slate-600 opacity-60">
-<div class="flex justify-between items-start mb-4">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:water-boiler"></iconify-icon>
-<span class="text-3xl font-bold">智能燃气感应器</span>
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 border-l-[8px] md:border-l-[12px] border-l-slate-600 opacity-60">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 mb-3 md:mb-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:water-boiler"></iconify-icon>
+<span class="text-2xl md:text-3xl font-bold">智能燃气感应器</span>
 </div>
-<span class="bg-slate-700 text-slate-400 px-4 py-1 rounded-full text-xl font-bold">离线</span>
+<span class="bg-slate-700 text-slate-400 px-3 md:px-4 py-1 rounded-full text-lg md:text-xl font-bold">离线</span>
 </div>
-<p class="text-xl text-slate-400">最后在线: 2小时前 | 建议检查电池</p>
+<p class="text-lg md:text-xl text-slate-400">最后在线: 2小时前 | 建议检查电池</p>
 </div>
 </div>
 </div>
 <!-- 中间：活动轨迹地图 -->
-<div class="col-span-8 space-y-8">
-<div class="flex justify-between items-end">
-<h2 class="text-3xl font-bold text-yellow-400">老人活动轨迹可视化</h2>
+<div class="col-span-1 lg:col-span-8 space-y-6 md:space-y-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<h2 class="text-2xl md:text-3xl font-bold text-yellow-400">老人活动轨迹可视化</h2>
 <div class="flex gap-4">
-<button class="bg-slate-800 px-6 py-2 rounded-xl text-xl" onclick="window.location.href='indoor-monitor.html'">室内</button>
-<button class="bg-blue-600 px-6 py-2 rounded-xl text-xl font-bold" onclick="window.location.href='outdoor-monitor.html'">室外</button>
+<button class="bg-slate-800 px-4 md:px-6 py-2 rounded-xl text-lg md:text-xl" onclick="window.location.href='indoor-monitor.html'">室内</button>
+<button class="bg-blue-600 px-4 md:px-6 py-2 rounded-xl text-lg md:text-xl font-bold" onclick="window.location.href='outdoor-monitor.html'">室外</button>
 </div>
 </div>
-<div class="high-contrast-card rounded-3xl p-4 h-[600px] map-placeholder overflow-hidden">
+<div class="high-contrast-card rounded-3xl p-4 h-[400px] md:h-[600px] map-placeholder overflow-hidden relative">
 <!-- 模拟地图内容 -->
 <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-<p class="text-3xl text-slate-600 opacity-30 font-black">社区地图视图模拟</p>
+<p class="text-2xl md:text-3xl text-slate-600 opacity-30 font-black">社区地图视图模拟</p>
 </div>
 <!-- 模拟轨迹线 -->
-<div class="track-line w-40 left-1/4 top-1/2 rotate-45"></div>
-<div class="track-line w-60 left-[40%] top-[70%] -rotate-12"></div>
+<div class="track-line w-24 md:w-40 left-1/4 top-1/2 rotate-45"></div>
+<div class="track-line w-40 md:w-60 left-[40%] top-[70%] -rotate-12"></div>
 <!-- 轨迹点 -->
-<div class="track-point left-1/4 top-1/2"></div>
-<div class="track-point left-[40%] top-[70%]"></div>
-<div class="track-point left-[65%] top-[65%] scale-150 border-4 border-white bg-red-500 shadow-[0_0_20px_red]">
-<div class="absolute -top-16 -left-10 bg-white text-black px-4 py-2 rounded-lg text-xl font-bold whitespace-nowrap">
+<div class="track-point left-1/4 top-1/2 w-4 h-4 md:w-5 md:h-5"></div>
+<div class="track-point left-[40%] top-[70%] w-4 h-4 md:w-5 md:h-5"></div>
+<div class="track-point left-[65%] top-[65%] scale-150 border-4 border-white bg-red-500 shadow-[0_0_20px_red] w-4 h-4 md:w-5 md:h-5">
+<div class="absolute -top-12 md:-top-16 -left-8 md:-left-10 bg-white text-black px-2 md:px-4 py-1 md:py-2 rounded-lg text-base md:text-xl font-bold whitespace-nowrap">
                         当前位置：社区凉亭
                     </div>
 </div>
 <!-- 右侧位置日志 -->
-<div class="absolute right-8 top-8 w-64 bg-slate-900/90 p-6 rounded-2xl border-2 border-slate-700">
-<h3 class="text-xl font-bold mb-4 border-b border-slate-700 pb-2">今日轨迹摘要</h3>
-<ul class="space-y-4 text-lg">
-<li class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded-full"></span> 08:30 出门</li>
-<li class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded-full"></span> 09:00 社区超市</li>
-<li class="flex items-center gap-2"><span class="w-3 h-3 bg-yellow-500 rounded-full"></span> 10:15 凉亭(停留中)</li>
+<div class="absolute right-2 md:right-8 top-2 md:top-8 w-48 md:w-64 bg-slate-900/90 p-3 md:p-6 rounded-2xl border-2 border-slate-700">
+<h3 class="text-lg md:text-xl font-bold mb-2 md:mb-4 border-b border-slate-700 pb-2">今日轨迹摘要</h3>
+<ul class="space-y-2 md:space-y-4 text-base md:text-lg">
+<li class="flex items-center gap-2"><span class="w-2 h-2 md:w-3 md:h-3 bg-blue-500 rounded-full"></span> 08:30 出门</li>
+<li class="flex items-center gap-2"><span class="w-2 h-2 md:w-3 md:h-3 bg-blue-500 rounded-full"></span> 09:00 社区超市</li>
+<li class="flex items-center gap-2"><span class="w-2 h-2 md:w-3 md:h-3 bg-yellow-500 rounded-full"></span> 10:15 凉亭(停留中)</li>
 </ul>
 </div>
 </div>
 <!-- 异常预警历史 -->
-<div class="high-contrast-card rounded-3xl p-8">
-<h2 class="text-3xl font-bold mb-6 text-red-400">异常预警记录 (最近7天)</h2>
-<table class="w-full text-left text-2xl">
+<div class="high-contrast-card rounded-3xl p-4 md:p-8 overflow-x-auto">
+<h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-red-400">异常预警记录 (最近7天)</h2>
+<div class="hidden md:block">
+<table class="w-full text-left text-xl">
 <thead class="text-slate-400 border-b-2 border-slate-700">
 <tr>
-<th class="py-4 px-4">时间</th>
-<th class="py-4 px-4">报警类型</th>
-<th class="py-4 px-4">详情</th>
-<th class="py-4 px-4">处置状态</th>
+<th class="py-3 md:py-4 px-2 md:px-4">时间</th>
+<th class="py-3 md:py-4 px-2 md:px-4">报警类型</th>
+<th class="py-3 md:py-4 px-2 md:px-4">详情</th>
+<th class="py-3 md:py-4 px-2 md:px-4">处置状态</th>
 </tr>
 </thead>
 <tbody class="divide-y divide-slate-800">
 <tr>
-<td class="py-6 px-4">03-29 02:15</td>
-<td class="py-6 px-4 text-yellow-400">心率过快</td>
-<td class="py-6 px-4 text-lg">心率突增至 115bpm，持续3分钟</td>
-<td class="py-6 px-4"><span class="bg-green-900 text-green-400 px-4 py-1 rounded-lg">自动处理</span></td>
+<td class="py-4 md:py-6 px-2 md:px-4">03-29 02:15</td>
+<td class="py-4 md:py-6 px-2 md:px-4 text-yellow-400">心率过快</td>
+<td class="py-4 md:py-6 px-2 md:px-4 text-base md:text-lg">心率突增至 115bpm，持续3分钟</td>
+<td class="py-4 md:py-6 px-2 md:px-4"><span class="bg-green-900 text-green-400 px-2 md:px-4 py-1 rounded-lg text-base md:text-lg">自动处理</span></td>
 </tr>
 <tr>
-<td class="py-6 px-4">03-25 10:30</td>
-<td class="py-6 px-4 text-red-500">紧急呼叫</td>
-<td class="py-6 px-4 text-lg">老人主动触发一键报警</td>
-<td class="py-6 px-4"><span class="bg-blue-900 text-blue-400 px-4 py-1 rounded-lg">人工核实完成</span></td>
+<td class="py-4 md:py-6 px-2 md:px-4">03-25 10:30</td>
+<td class="py-4 md:py-6 px-2 md:px-4 text-red-500">紧急呼叫</td>
+<td class="py-4 md:py-6 px-2 md:px-4 text-base md:text-lg">老人主动触发一键报警</td>
+<td class="py-4 md:py-6 px-2 md:px-4"><span class="bg-blue-900 text-blue-400 px-2 md:px-4 py-1 rounded-lg text-base md:text-lg">人工核实完成</span></td>
 </tr>
 <tr>
-<td class="py-6 px-4">03-24 18:20</td>
-<td class="py-6 px-4 text-orange-400">轨迹异常</td>
-<td class="py-6 px-4 text-lg">离开社区围栏范围 (已回家)</td>
-<td class="py-6 px-4"><span class="bg-green-900 text-green-400 px-4 py-1 rounded-lg">已解除</span></td>
+<td class="py-4 md:py-6 px-2 md:px-4">03-24 18:20</td>
+<td class="py-4 md:py-6 px-2 md:px-4 text-orange-400">轨迹异常</td>
+<td class="py-4 md:py-6 px-2 md:px-4 text-base md:text-lg">离开社区围栏范围 (已回家)</td>
+<td class="py-4 md:py-6 px-2 md:px-4"><span class="bg-green-900 text-green-400 px-2 md:px-4 py-1 rounded-lg text-base md:text-lg">已解除</span></td>
 </tr>
 </tbody>
 </table>
+</div>
+<!-- 移动端卡片式显示 -->
+<div class="md:hidden space-y-4">
+<div class="bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-lg font-bold text-slate-400">03-29 02:15</span>
+<span class="bg-green-900 text-green-400 px-3 py-1 rounded-lg text-base">自动处理</span>
+</div>
+<p class="text-lg text-yellow-400 font-bold mb-1">心率过快</p>
+<p class="text-base text-slate-400">心率突增至 115bpm，持续3分钟</p>
+</div>
+<div class="bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-lg font-bold text-slate-400">03-25 10:30</span>
+<span class="bg-blue-900 text-blue-400 px-3 py-1 rounded-lg text-base">人工核实完成</span>
+</div>
+<p class="text-lg text-red-500 font-bold mb-1">紧急呼叫</p>
+<p class="text-base text-slate-400">老人主动触发一键报警</p>
+</div>
+<div class="bg-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-lg font-bold text-slate-400">03-24 18:20</span>
+<span class="bg-green-900 text-green-400 px-3 py-1 rounded-lg text-base">已解除</span>
+</div>
+<p class="text-lg text-orange-400 font-bold mb-1">轨迹异常</p>
+<p class="text-base text-slate-400">离开社区围栏范围 (已回家)</p>
+</div>
+</div>
 </div>
 </div>
 </main>
