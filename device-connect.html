@@ -18,81 +18,81 @@
         @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4 md:p-6 min-h-screen">
 <!-- 顶部导航 -->
-<header class="flex items-center mb-8 pb-4 border-b-4 border-slate-700">
-<button class="mr-6" onclick="window.location.href='device.html'">
-<iconify-icon class="text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
+<header class="flex items-center mb-6 md:mb-8 pb-4 border-b-4 border-slate-700">
+<button class="mr-4 md:mr-6" onclick="window.location.href='device.html'">
+<iconify-icon class="text-4xl md:text-5xl text-blue-400" icon="mdi:arrow-left"></iconify-icon>
 </button>
-<h1 class="text-4xl font-bold tracking-wider">设备蓝牙配对</h1>
+<h1 class="text-2xl md:text-4xl font-bold tracking-wider">设备蓝牙配对</h1>
 </header>
 
 <main class="max-w-[1200px] mx-auto">
 <!-- 搜索状态条 -->
-<div class="high-contrast-card rounded-3xl p-6 mb-8 flex items-center justify-between">
-<div class="flex items-center gap-4">
+<div class="high-contrast-card rounded-3xl p-4 md:p-6 mb-6 md:mb-8 flex flex-col md:flex-row items-center md:items-center justify-between gap-4">
+<div class="flex items-center gap-3 md:gap-4">
 <iconify-icon class="text-4xl text-blue-400" icon="mdi:bluetooth-searching"></iconify-icon>
 <div>
-<h2 class="text-2xl font-bold searching">正在搜索附近智能设备...</h2>
-<p class="text-xl text-slate-400">请确保设备已开启并处于配对模式</p>
+<h2 class="text-xl md:text-2xl font-bold searching">正在搜索附近智能设备...</h2>
+<p class="text-lg md:text-xl text-slate-400">请确保设备已开启并处于配对模式</p>
 </div>
 </div>
-<div class="w-16 h-16 border-8 border-t-blue-500 border-r-blue-500 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+<div class="w-12 h-12 md:w-16 md:h-16 border-6 md:border-8 border-t-blue-500 border-r-blue-500 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
 </div>
 
 <!-- 设备列表 -->
-<div class="space-y-6 mb-8">
-<div class="device-card high-contrast-card rounded-3xl p-6 flex justify-between items-center" onclick="connectDevice('健康监测手环')">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:watch-variant"></iconify-icon>
+<div class="space-y-4 md:space-y-6 mb-6 md:mb-8">
+<div class="device-card high-contrast-card rounded-3xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:watch-variant"></iconify-icon>
 <div>
-<h3 class="text-3xl font-bold">健康监测手环</h3>
-<p class="text-xl text-slate-400">型号：HB-100</p>
+<h3 class="text-2xl md:text-3xl font-bold">健康监测手环</h3>
+<p class="text-lg md:text-xl text-slate-400">型号：HB-100</p>
 </div>
 </div>
-<span class="bg-slate-700 text-slate-400 px-4 py-2 rounded-full text-xl font-bold">未连接</span>
+<span class="bg-slate-700 text-slate-400 px-3 md:px-4 py-1 md:py-2 rounded-full text-lg md:text-xl font-bold">未连接</span>
 </div>
 
-<div class="device-card high-contrast-card rounded-3xl p-6 flex justify-between items-center" onclick="connectDevice('全自动血压检测仪')">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:medical-bag"></iconify-icon>
+<div class="device-card high-contrast-card rounded-3xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:medical-bag"></iconify-icon>
 <div>
-<h3 class="text-3xl font-bold">全自动血压检测仪</h3>
-<p class="text-xl text-slate-400">型号：BP-200</p>
+<h3 class="text-2xl md:text-3xl font-bold">全自动血压检测仪</h3>
+<p class="text-lg md:text-xl text-slate-400">型号：BP-200</p>
 </div>
 </div>
-<span class="bg-slate-700 text-slate-400 px-4 py-2 rounded-full text-xl font-bold">未连接</span>
+<span class="bg-slate-700 text-slate-400 px-3 md:px-4 py-1 md:py-2 rounded-full text-lg md:text-xl font-bold">未连接</span>
 </div>
 
-<div class="device-card high-contrast-card rounded-3xl p-6 flex justify-between items-center" onclick="connectDevice('紧急呼叫按钮')">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:alert-decagram"></iconify-icon>
+<div class="device-card high-contrast-card rounded-3xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:alert-decagram"></iconify-icon>
 <div>
-<h3 class="text-3xl font-bold">紧急呼叫按钮</h3>
-<p class="text-xl text-slate-400">型号：EC-300</p>
+<h3 class="text-2xl md:text-3xl font-bold">紧急呼叫按钮</h3>
+<p class="text-lg md:text-xl text-slate-400">型号：EC-300</p>
 </div>
 </div>
-<span class="bg-slate-700 text-slate-400 px-4 py-2 rounded-full text-xl font-bold">未连接</span>
+<span class="bg-slate-700 text-slate-400 px-3 md:px-4 py-1 md:py-2 rounded-full text-lg md:text-xl font-bold">未连接</span>
 </div>
 
-<div class="device-card high-contrast-card rounded-3xl p-6 flex justify-between items-center" onclick="connectDevice('智能床垫感应器')">
-<div class="flex items-center gap-4">
-<iconify-icon class="text-5xl text-slate-300" icon="mdi:bed-empty"></iconify-icon>
+<div class="device-card high-contrast-card rounded-3xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex items-center gap-3 md:gap-4">
+<iconify-icon class="text-4xl md:text-5xl text-slate-300" icon="mdi:bed-empty"></iconify-icon>
 <div>
-<h3 class="text-3xl font-bold">智能床垫感应器</h3>
-<p class="text-xl text-slate-400">型号：SM-400</p>
+<h3 class="text-2xl md:text-3xl font-bold">智能床垫感应器</h3>
+<p class="text-lg md:text-xl text-slate-400">型号：SM-400</p>
 </div>
 </div>
-<span class="bg-slate-700 text-slate-400 px-4 py-2 rounded-full text-xl font-bold">未连接</span>
+<span class="bg-slate-700 text-slate-400 px-3 md:px-4 py-1 md:py-2 rounded-full text-lg md:text-xl font-bold">未连接</span>
 </div>
 </div>
 
 <!-- 底部操作 -->
-<div class="flex flex-col md:flex-row gap-4">
-<button class="action-button flex-1 py-4 rounded-xl text-2xl font-bold" onclick="refreshSearch()">
+<div class="flex flex-col md:flex-row gap-3 md:gap-4">
+<button class="action-button flex-1 py-3 md:py-4 rounded-xl text-lg md:text-2xl font-bold" onclick="refreshSearch()">
 <iconify-icon class="inline-block mr-2" icon="mdi:refresh"></iconify-icon> 刷新搜索
 </button>
-<button class="bg-slate-700 flex-1 py-4 rounded-xl text-2xl font-bold" onclick="window.location.href='index.html'">
+<button class="bg-slate-700 flex-1 py-3 md:py-4 rounded-xl text-lg md:text-2xl font-bold" onclick="window.location.href='index.html'">
 <iconify-icon class="inline-block mr-2" icon="mdi:home"></iconify-icon> 返回首页
 </button>
 </div>
